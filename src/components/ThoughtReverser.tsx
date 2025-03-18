@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { RefreshCcw, Lightbulb, Copy, CheckCircle2 } from 'lucide-react';
+import { Lightbulb, Copy, CheckCircle2 } from 'lucide-react';
 import { toast } from 'sonner';
 
 // Example thought reversals for demonstration purposes
@@ -61,7 +61,6 @@ const thoughtReversals = [
 const ThoughtReverser = () => {
   const [inputThought, setInputThought] = useState('');
   const [result, setResult] = useState<{ original: string; reversed: string } | null>(null);
-  const [isFlipped, setIsFlipped] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const generateReversedThought = () => {
@@ -79,27 +78,19 @@ const ThoughtReverser = () => {
       reversed: thoughtReversals[randomIndex].reversed,
     });
     
-    // Reset flip state
-    setIsFlipped(false);
-    
     toast.success('Thought reversed successfully!');
   };
 
   const copyToClipboard = () => {
     if (!result) return;
     
-    const textToCopy = isFlipped ? result.reversed : result.original;
-    navigator.clipboard.writeText(textToCopy);
+    navigator.clipboard.writeText(result.reversed);
     setCopied(true);
     toast.success('Text copied to clipboard!');
     
     setTimeout(() => {
       setCopied(false);
     }, 2000);
-  };
-
-  const flipCard = () => {
-    setIsFlipped(!isFlipped);
   };
 
   return (
@@ -124,42 +115,24 @@ const ThoughtReverser = () => {
         className="w-full gradient-bg text-white hover:opacity-90"
         disabled={!inputThought.trim()}
       >
-        <RefreshCcw className="mr-2 h-4 w-4" /> Reverse My Thought
+        Reverse My Thought
       </Button>
 
       {result && (
         <div className="mt-8">
-          <Label className="mb-2 block">Your perspective flip:</Label>
+          <Label className="mb-2 block">Your reversed perspective:</Label>
           
-          <div className="perspective w-full mb-6">
-            <div className={`flip-card relative w-full h-[200px] cursor-pointer ${isFlipped ? 'flip-card-flipped' : ''}`} onClick={flipCard}>
-              <div className="flip-card-front absolute w-full h-full">
-                <Card className="w-full h-full shadow-md border-2 border-nuno-purple/20">
-                  <CardContent className="p-6 flex flex-col justify-between h-full">
-                    <div>
-                      <div className="text-sm text-gray-500 mb-2">Original Thought:</div>
-                      <p className="text-lg font-medium">{result.original}</p>
-                    </div>
-                    <p className="text-sm text-nuno-purple mt-4">Click to see the reversed perspective</p>
-                  </CardContent>
-                </Card>
+          <Card className="w-full shadow-md gradient-bg text-white mb-6">
+            <CardContent className="p-6">
+              <div>
+                <p className="text-lg font-medium">{result.reversed}</p>
+                <div className="flex items-center mt-4 text-sm text-white/80">
+                  <Lightbulb className="h-4 w-4 mr-2" /> 
+                  <p>Consider how this different view might be true</p>
+                </div>
               </div>
-              <div className="flip-card-back absolute w-full h-full">
-                <Card className="w-full h-full gradient-bg text-white shadow-md">
-                  <CardContent className="p-6 flex flex-col justify-between h-full">
-                    <div>
-                      <div className="text-sm text-white/80 mb-2">Reversed Perspective:</div>
-                      <p className="text-lg font-medium">{result.reversed}</p>
-                    </div>
-                    <div className="flex items-center mt-4 text-sm text-white/80">
-                      <Lightbulb className="h-4 w-4 mr-2" /> 
-                      <p>Consider how this different view might be true</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
           
           <Button 
             variant="outline" 
@@ -172,7 +145,7 @@ const ThoughtReverser = () => {
               </>
             ) : (
               <>
-                <Copy className="mr-2 h-4 w-4" /> Copy {isFlipped ? 'Reversed' : 'Original'} Thought
+                <Copy className="mr-2 h-4 w-4" /> Copy Reversed Perspective
               </>
             )}
           </Button>
