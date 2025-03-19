@@ -30,7 +30,7 @@ const Features = () => {
   return (
     <section className="w-full py-16 px-6 bg-gray-50">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 fade-in-on-scroll">
           <h2 className="text-3xl font-bold mb-4">Our Reversal Tools</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Explore our suite of reversal tools designed to help you see things differently.
@@ -41,7 +41,11 @@ const Features = () => {
           {features.map((feature, index) => (
             <div 
               key={index} 
-              className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+              className={`bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 hover-lift ${
+                index === 0 ? 'slide-in-from-left' : 
+                index === 2 ? 'slide-in-from-right' : 
+                'scale-in-on-scroll'
+              } stagger-delay-${index + 1}`}
             >
               <div className={`p-6 bg-gradient-to-r ${feature.color}`}>
                 <div className="rounded-full bg-white/20 w-16 h-16 flex items-center justify-center">
@@ -53,7 +57,7 @@ const Features = () => {
                 <p className="text-gray-600 mb-4">{feature.description}</p>
                 <Link 
                   to={feature.link} 
-                  className="inline-flex items-center text-nuno-purple hover:underline font-medium"
+                  className="inline-flex items-center text-nuno-purple hover:underline font-medium rainbow-text-hover"
                 >
                   Try it now <ArrowRight size={16} className="ml-1" />
                 </Link>

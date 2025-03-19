@@ -63,17 +63,20 @@ const Testimonials = () => {
   return (
     <section className="w-full py-16 px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 fade-in-on-scroll">
           <h2 className="text-3xl font-bold mb-4">What People Are Saying</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             See how NunoReverse is helping people gain new perspectives.
           </p>
         </div>
 
-        <div className="relative">
+        <div className="relative fade-in-on-scroll">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {visibleTestimonials().map((testimonial) => (
-              <Card key={testimonial.id} className="shadow-md">
+            {visibleTestimonials().map((testimonial, idx) => (
+              <Card 
+                key={testimonial.id} 
+                className={`shadow-md hover-lift scale-in-on-scroll stagger-delay-${idx + 1}`}
+              >
                 <CardContent className="p-6">
                   <div className="flex mb-4">
                     {[...Array(5)].map((_, i) => (

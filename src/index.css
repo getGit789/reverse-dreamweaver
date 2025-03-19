@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
@@ -94,6 +93,7 @@
   body {
     @apply bg-background text-foreground font-inter;
     font-family: 'Inter', sans-serif;
+    cursor: none;
   }
 }
 
@@ -128,4 +128,109 @@
 
 .flip-card-back {
   transform: rotateY(180deg);
+}
+
+.fade-in-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scale-in-on-scroll {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.6s ease-out, transform 0.8s ease-out;
+}
+
+.scale-in-on-scroll.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.slide-in-from-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.6s ease-out, transform 0.8s ease-out;
+}
+
+.slide-in-from-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-in-from-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.6s ease-out, transform 0.8s ease-out;
+}
+
+.slide-in-from-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.stagger-delay-1 {
+  transition-delay: 0.1s;
+}
+
+.stagger-delay-2 {
+  transition-delay: 0.2s;
+}
+
+.stagger-delay-3 {
+  transition-delay: 0.3s;
+}
+
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+
+.rainbow-text-hover {
+  position: relative;
+}
+
+.rainbow-text-hover::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #4A148C, #64B5F6, #ff9a9e, #fad0c4);
+  transition: width 0.3s ease;
+}
+
+.rainbow-text-hover:hover::after {
+  width: 100%;
+}
+
+button, a, input, textarea, select {
+  cursor: none;
+}
+
+button:hover, a:hover {
+  cursor: none;
+}
+
+@media (max-width: 768px) {
+  body {
+    cursor: auto;
+  }
+  
+  button, a, input, textarea, select {
+    cursor: auto;
+  }
+  
+  button:hover, a:hover {
+    cursor: auto;
+  }
 }

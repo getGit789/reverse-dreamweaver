@@ -7,14 +7,14 @@ const CTA = () => {
   return (
     <section className="w-full py-20 px-6 gradient-bg">
       <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 fade-in-on-scroll">
           Ready to See Things Differently?
         </h2>
-        <p className="text-xl text-white/90 max-w-2xl mx-auto mb-10">
+        <p className="text-xl text-white/90 max-w-2xl mx-auto mb-10 fade-in-on-scroll stagger-delay-1">
           Start reversing your perspective today and discover new insights.
         </p>
         <Button 
-          className="bg-white text-nuno-purple hover:bg-gray-100 px-6 py-6 text-lg"
+          className="bg-white text-nuno-purple hover:bg-gray-100 px-6 py-6 text-lg hover-lift fade-in-on-scroll stagger-delay-2"
           asChild
         >
           <Link to="/text-reverser">
