@@ -1,7 +1,6 @@
 
 import Navbar from '@/components/Navbar';
 import ImageReverser from '@/components/ImageReverser';
-import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
 
 const ImageReverserPage = () => {
@@ -19,7 +18,6 @@ const ImageReverserPage = () => {
           <ImageReverser />
         </div>
       </main>
-      <CTA />
       <Footer />
     </div>
   );

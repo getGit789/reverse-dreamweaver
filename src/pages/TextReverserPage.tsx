@@ -1,7 +1,6 @@
 
 import Navbar from '@/components/Navbar';
 import TextReverser from '@/components/TextReverser';
-import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
 
 const TextReverserPage = () => {
@@ -19,7 +18,6 @@ const TextReverserPage = () => {
           <TextReverser />
         </div>
       </main>
-      <CTA />
       <Footer />
     </div>
   );

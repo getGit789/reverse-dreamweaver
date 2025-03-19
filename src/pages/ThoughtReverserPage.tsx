@@ -1,7 +1,6 @@
 
 import Navbar from '@/components/Navbar';
 import ThoughtReverser from '@/components/ThoughtReverser';
-import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
 
 const ThoughtReverserPage = () => {
@@ -19,7 +18,6 @@ const ThoughtReverserPage = () => {
           <ThoughtReverser />
         </div>
       </main>
-      <CTA />
       <Footer />
     </div>
   );
