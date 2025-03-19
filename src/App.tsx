@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import TextReverserPage from "./pages/TextReverserPage";
 import ImageReverserPage from "./pages/ImageReverserPage";
 import ThoughtReverserPage from "./pages/ThoughtReverserPage";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/text-reverser" element={<TextReverserPage />} />
           <Route path="/image-reverser" element={<ImageReverserPage />} />
           <Route path="/thought-reverser" element={<ThoughtReverserPage />} />
+          <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
