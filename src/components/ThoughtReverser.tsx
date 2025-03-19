@@ -73,7 +73,7 @@ const thoughtPatterns = {
       "My attention shapes my experience - I can notice more than just the negatives."
     ]
   },
-  fortune telling: {
+  "fortuneTelling": {
     patterns: [
       "will fail", "won't work", "going to be", "future", "predict", "know it will", 
       "inevitably", "destined to", "doomed", "hopeless"
