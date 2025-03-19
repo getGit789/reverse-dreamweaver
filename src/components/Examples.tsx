@@ -160,6 +160,7 @@ const ThoughtExample = () => {
 
 const ParallaxSection = () => {
   const [offset, setOffset] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const sectionRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
@@ -177,53 +178,95 @@ const ParallaxSection = () => {
       setOffset(newOffset);
     };
     
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!sectionRef.current) return;
+      
+      const rect = sectionRef.current.getBoundingClientRect();
+      // Convert mouse position to be relative to the center of the section
+      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+      
+      setMousePosition({ x, y });
+    };
+    
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
   
   return (
     <div 
       ref={sectionRef}
-      className="relative h-[50vh] flex items-center justify-center overflow-hidden my-16"
+      className="relative h-[60vh] flex items-center justify-center overflow-hidden my-16"
     >
       <div 
         className="absolute inset-0 -z-10" 
         style={{
-          backgroundImage: 'linear-gradient(135deg, #2A0A4C 0%, #345986 100%)',
+          backgroundImage: 'linear-gradient(135deg, #1a103c 0%, #0c3a6d 100%)',
           transform: `translateY(${offset * 0.5}px)`
         }}
       ></div>
       
       <div 
-        className="absolute inset-0 -z-10 opacity-20" 
+        className="absolute inset-0 -z-10 opacity-10" 
         style={{
           backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.8) 10%, transparent 70%)',
-          transform: `translateY(${offset * -0.7}px) scale(${1 + Math.abs(offset) * 0.003})`
+          transform: `translateY(${offset * -0.7}px) translateX(${mousePosition.x * 20}px) scale(${1 + Math.abs(offset) * 0.003})`
         }}
       ></div>
       
-      <div className="text-center text-white max-w-3xl mx-auto px-8 py-10 z-10 rounded-xl bg-black/20 backdrop-blur-sm">
+      {Array.from({ length: 20 }).map((_, i) => (
+        <div 
+          key={i}
+          className="absolute rounded-full bg-white/20"
+          style={{
+            width: `${Math.random() * 10 + 5}px`,
+            height: `${Math.random() * 10 + 5}px`,
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            animation: `float ${Math.random() * 10 + 10}s linear infinite`,
+            animationDelay: `${Math.random() * 10}s`,
+            zIndex: 1
+          }}
+        ></div>
+      ))}
+      
+      <div 
+        className="text-center text-white max-w-3xl mx-auto px-8 py-12 z-10 rounded-xl glass-effect border border-white/20 shadow-xl"
+        style={{
+          background: 'rgba(0,0,0,0.6)',
+          backdropFilter: 'blur(10px)',
+          transform: `translateX(${mousePosition.x * -15}px) translateY(${mousePosition.y * -15}px)`,
+          transition: 'transform 0.1s ease-out'
+        }}
+      >
         <h2 
-          className="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)]"
+          className="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
           style={{ transform: `translateY(${offset * -0.2}px)` }}
         >
           Reverse Your Perspective Today
         </h2>
         
         <p 
-          className="text-xl opacity-100 mb-8 text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]"
+          className="text-xl mb-8 text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]"
           style={{ transform: `translateY(${offset * -0.3}px)` }}
         >
           Unlock new ways of seeing with our suite of reversal tools.
         </p>
         
         <Button 
-          className="bg-white text-nuno-purple hover:bg-gray-100 px-8 py-6 text-lg font-bold shadow-lg"
+          className="bg-white text-purple-900 hover:bg-gray-100 px-8 py-6 text-lg font-bold shadow-lg group relative overflow-hidden"
           style={{ transform: `translateY(${offset * -0.5}px)` }}
           asChild
         >
-          <Link to="/text-reverser">
-            Get Started <ArrowRight className="ml-2" />
+          <Link to="/text-reverser" className="flex items-center">
+            <span className="relative z-10">Get Started</span>
+            <ArrowRight className="ml-2 relative z-10 group-hover:translate-x-1 transition-transform" />
+            <div className="absolute top-0 left-0 w-20 h-20 bg-purple-300/40 rotate-45 transform -translate-x-32 -translate-y-8 group-hover:translate-x-64 group-hover:translate-y-8 transition-all duration-700"></div>
           </Link>
         </Button>
       </div>

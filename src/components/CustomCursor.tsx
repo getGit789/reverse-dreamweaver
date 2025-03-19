@@ -7,8 +7,12 @@ const CustomCursor = () => {
   const [isMoving, setIsMoving] = useState(false);
   const [direction, setDirection] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Short delay before showing cursor to avoid initial flicker
+    const timeout = setTimeout(() => setIsVisible(true), 300);
+    
     const updateCursorPosition = (e: MouseEvent) => {
       // Update last position before setting new position
       setLastPosition({ x: position.x, y: position.y });
@@ -46,6 +50,7 @@ const CustomCursor = () => {
       window.removeEventListener('mousemove', updateCursorPosition);
       window.removeEventListener('mouseover', handleMouseOver);
       clearTimeout(window.cursorTimeout);
+      clearTimeout(timeout);
     };
   }, [position, lastPosition]);
 
@@ -68,18 +73,22 @@ const CustomCursor = () => {
     };
   };
 
+  if (!isVisible) return null;
+
   return (
     <>
       <div 
-        className={`fixed w-${isHovering ? '10' : '6'} h-${isHovering ? '10' : '6'} rounded-full pointer-events-none z-[9999] mix-blend-difference transition-all duration-200`}
+        className="fixed rounded-full pointer-events-none z-[9999] mix-blend-difference transition-all duration-200"
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
           background: 'white',
           transform: 'translate(-50%, -50%)',
-          width: isHovering ? '2rem' : '1.5rem',
-          height: isHovering ? '2rem' : '1.5rem',
-          opacity: 0.7
+          width: isHovering ? '2.5rem' : '1.5rem',
+          height: isHovering ? '2.5rem' : '1.5rem',
+          opacity: 0.8,
+          boxShadow: isHovering ? '0 0 20px 5px rgba(255,255,255,0.3)' : 'none',
+          transition: 'width 0.2s, height 0.2s, opacity 0.2s, box-shadow 0.3s'
         }}
       />
       <div 

@@ -16,6 +16,7 @@ const Index = () => {
   
   // State to track if custom cursor should be shown
   const [showCustomCursor, setShowCustomCursor] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   
   // Ensure smooth scrolling and setup cursor
   useEffect(() => {
@@ -40,6 +41,9 @@ const Index = () => {
       document.body.classList.remove('custom-cursor-active');
     }
     
+    // Set loaded state after a short delay for animations
+    setTimeout(() => setIsLoaded(true), 100);
+    
     return () => {
       window.removeEventListener('resize', handleResize);
       document.body.classList.remove('custom-cursor-active');
@@ -47,7 +51,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className={`min-h-screen flex flex-col transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
       {/* Only render custom cursor on desktop */}
       {showCustomCursor && <CustomCursor />}
       
