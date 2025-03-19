@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Flip, RefreshCw, ArrowDownUp } from 'lucide-react';
+import { ArrowRight, RotateCw, RefreshCw, ArrowDownUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const TextExample = () => {
@@ -41,7 +41,7 @@ const TextExample = () => {
       <div className="flex justify-center space-x-4">
         {!isFlipped ? (
           <Button onClick={reverseText} className="bg-nuno-purple hover:bg-nuno-purple/90">
-            <Flip className="mr-2 h-4 w-4" /> Reverse Text
+            <RotateCw className="mr-2 h-4 w-4" /> Reverse Text
           </Button>
         ) : (
           <Button onClick={resetText} variant="outline" className="border-nuno-purple text-nuno-purple hover:bg-nuno-purple/10">
