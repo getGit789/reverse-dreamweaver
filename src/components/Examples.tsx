@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -190,36 +189,36 @@ const ParallaxSection = () => {
       <div 
         className="absolute inset-0 -z-10" 
         style={{
-          backgroundImage: 'linear-gradient(135deg, #4A148C 0%, #64B5F6 100%)',
+          backgroundImage: 'linear-gradient(135deg, #2A0A4C 0%, #345986 100%)',
           transform: `translateY(${offset * 0.5}px)`
         }}
       ></div>
       
       <div 
-        className="absolute inset-0 -z-10 opacity-30" 
+        className="absolute inset-0 -z-10 opacity-20" 
         style={{
           backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.8) 10%, transparent 70%)',
           transform: `translateY(${offset * -0.7}px) scale(${1 + Math.abs(offset) * 0.003})`
         }}
       ></div>
       
-      <div className="text-center text-white max-w-3xl mx-auto px-6 z-10">
+      <div className="text-center text-white max-w-3xl mx-auto px-8 py-10 z-10 rounded-xl bg-black/20 backdrop-blur-sm">
         <h2 
-          className="text-4xl md:text-5xl font-bold mb-6"
+          className="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)]"
           style={{ transform: `translateY(${offset * -0.2}px)` }}
         >
           Reverse Your Perspective Today
         </h2>
         
         <p 
-          className="text-xl opacity-90 mb-8"
+          className="text-xl opacity-100 mb-8 text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]"
           style={{ transform: `translateY(${offset * -0.3}px)` }}
         >
           Unlock new ways of seeing with our suite of reversal tools.
         </p>
         
         <Button 
-          className="bg-white text-nuno-purple hover:bg-gray-100 px-8 py-6 text-lg"
+          className="bg-white text-nuno-purple hover:bg-gray-100 px-8 py-6 text-lg font-bold shadow-lg"
           style={{ transform: `translateY(${offset * -0.5}px)` }}
           asChild
         >
