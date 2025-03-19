@@ -24,7 +24,7 @@ const CustomCursor = () => {
       
       // Reset moving state after a short delay
       clearTimeout(window.cursorTimeout);
-      window.cursorTimeout = setTimeout(() => setIsMoving(false), 100);
+      window.cursorTimeout = window.setTimeout(() => setIsMoving(false), 100) as unknown as number;
     };
 
     window.addEventListener('mousemove', updateCursorPosition);
