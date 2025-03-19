@@ -5,58 +5,128 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Lightbulb, Copy, CheckCircle2 } from 'lucide-react';
 import { toast } from 'sonner';
+import { Textarea } from '@/components/ui/textarea';
 
-// Example thought reversals for demonstration purposes
-const thoughtReversals = [
-  {
-    original: "I need to be perfect to succeed.",
-    reversed: "Making mistakes is essential for growth and success.",
+// Categories of cognitive distortions with their reversals
+const thoughtPatterns = {
+  catastrophizing: {
+    patterns: [
+      "worst", "terrible", "disaster", "can't handle", "catastrophe", "nightmare", 
+      "end of the world", "horrible", "unbearable", "ruined"
+    ],
+    reversals: [
+      "This is challenging but manageable. I've handled difficult situations before.",
+      "While this isn't ideal, I can cope with it step by step.",
+      "This feels difficult now, but it's just one moment in a larger journey.",
+      "I can handle discomfort and still move forward toward what matters.",
+      "This is uncomfortable but not dangerous. I can navigate through this."
+    ]
   },
-  {
-    original: "I always have to say yes to opportunities.",
-    reversed: "Saying no creates space for what truly matters.",
+  blackAndWhite: {
+    patterns: [
+      "always", "never", "everything", "nothing", "everyone", "no one", "completely", 
+      "totally", "perfect", "terrible", "impossible"
+    ],
+    reversals: [
+      "There are degrees and nuances to most situations, not just extremes.",
+      "Most things exist on a spectrum rather than as absolutes.",
+      "There may be aspects of this situation that don't fit a simple category.",
+      "I can look for the middle ground where multiple perspectives might be valid.",
+      "Life often unfolds in shades of gray, not just black and white."
+    ]
   },
-  {
-    original: "Money is the most important measure of success.",
-    reversed: "Success is measured by impact, fulfillment, and relationships.",
+  shouldStatements: {
+    patterns: [
+      "should", "must", "have to", "ought to", "supposed to", "need to", "required"
+    ],
+    reversals: [
+      "I can choose what works best for me rather than following rigid rules.",
+      "It's okay to consider what I want, not just what I think I should do.",
+      "I can be flexible with my expectations of myself and others.",
+      "There are often many valid approaches, not just one 'right' way.",
+      "I can focus on preferences and choices rather than obligations."
+    ]
   },
-  {
-    original: "I need to work harder to be more productive.",
-    reversed: "Rest and recovery are essential to sustained productivity.",
+  mindReading: {
+    patterns: [
+      "thinks", "know they", "they believe", "they're thinking", "assumes", "judging", 
+      "sees me as", "opinion of me", "impression"
+    ],
+    reversals: [
+      "I don't actually know what others are thinking unless they tell me directly.",
+      "People might have different perspectives than what I'm assuming.",
+      "Others may be focused on their own concerns rather than judging me.",
+      "I can ask for clarification instead of assuming I know what someone thinks.",
+      "Different people can interpret the same situation in entirely different ways."
+    ]
   },
-  {
-    original: "I must control everything to ensure good outcomes.",
-    reversed: "Letting go allows for unexpected positive possibilities.",
+  negativeFilter: {
+    patterns: [
+      "failure", "mistake", "wrong", "bad", "terrible", "awful", "useless", "worthless", 
+      "inadequate", "incompetent"
+    ],
+    reversals: [
+      "There are likely positives in this situation that I haven't focused on yet.",
+      "I can acknowledge both challenges and successes in a balanced way.",
+      "Every experience contains opportunities for learning and growth.",
+      "I can choose to focus on what's going well alongside what's challenging.",
+      "My attention shapes my experience - I can notice more than just the negatives."
+    ]
   },
-  {
-    original: "Failure means I'm not good enough.",
-    reversed: "Failure is feedback that helps me improve.",
+  fortune telling: {
+    patterns: [
+      "will fail", "won't work", "going to be", "future", "predict", "know it will", 
+      "inevitably", "destined to", "doomed", "hopeless"
+    ],
+    reversals: [
+      "The future is not fixed - many different outcomes are possible.",
+      "I can prepare for challenges without assuming the worst will happen.",
+      "I've been surprised before by how things turned out differently than expected.",
+      "I can stay open to possibilities rather than convincing myself of one outcome.",
+      "I can focus on what I can control rather than trying to predict the unpredictable."
+    ]
   },
-  {
-    original: "I need everyone's approval.",
-    reversed: "My own approval matters most.",
-  },
-  {
-    original: "I need to know everything before starting.",
-    reversed: "Starting creates the path for learning what I need.",
-  },
-  {
-    original: "I don't have enough time.",
-    reversed: "I prioritize what truly matters with the time I have.",
-  },
-  {
-    original: "Change is risky and should be avoided.",
-    reversed: "Embracing change opens doors to new possibilities.",
-  },
-  {
-    original: "If it's not perfect, it's not worth doing.",
-    reversed: "Progress is better than perfection.",
-  },
-  {
-    original: "Problems are obstacles to be avoided.",
-    reversed: "Problems are opportunities for creative solutions.",
-  },
-];
+  personalization: {
+    patterns: [
+      "my fault", "blame", "responsible for", "caused", "should have prevented", 
+      "if only I had", "because of me", "my failure"
+    ],
+    reversals: [
+      "Many factors beyond my control contribute to any situation.",
+      "Other people make their own choices that I'm not responsible for.",
+      "I can acknowledge the broader context rather than taking all responsibility.",
+      "I'm just one factor in a complex situation with many influences.",
+      "I can focus on my response now rather than blaming myself."
+    ]
+  }
+};
+
+const generateReversalFromPatterns = (thought: string): string => {
+  // Convert to lowercase for pattern matching
+  const lowerThought = thought.toLowerCase();
+  
+  // Check each category for matching patterns
+  for (const [category, data] of Object.entries(thoughtPatterns)) {
+    for (const pattern of data.patterns) {
+      if (lowerThought.includes(pattern)) {
+        // Return a random reversal from the matching category
+        const reversals = data.reversals;
+        return reversals[Math.floor(Math.random() * reversals.length)];
+      }
+    }
+  }
+  
+  // Default reversals if no specific pattern is matched
+  const defaultReversals = [
+    "Consider viewing this situation from a different perspective.",
+    "There may be alternative ways of thinking about this that I haven't considered yet.",
+    "How might someone with a different viewpoint see this situation?",
+    "This is one interpretation, but other valid perspectives might exist.",
+    "I can hold this thought lightly, knowing it's just one way of seeing things."
+  ];
+  
+  return defaultReversals[Math.floor(Math.random() * defaultReversals.length)];
+};
 
 const ThoughtReverser = () => {
   const [inputThought, setInputThought] = useState('');
@@ -64,18 +134,16 @@ const ThoughtReverser = () => {
   const [copied, setCopied] = useState(false);
 
   const generateReversedThought = () => {
-    // For now, we'll randomly select one from our examples
-    // In a real application, this could use an AI service to generate unique reversals
-    
     if (inputThought.trim() === '') {
       toast.error('Please enter a thought to reverse');
       return;
     }
     
-    const randomIndex = Math.floor(Math.random() * thoughtReversals.length);
+    const reversedThought = generateReversalFromPatterns(inputThought);
+    
     setResult({
       original: inputThought,
-      reversed: thoughtReversals[randomIndex].reversed,
+      reversed: reversedThought,
     });
     
     toast.success('Thought reversed successfully!');
@@ -100,7 +168,7 @@ const ThoughtReverser = () => {
       <div className="mb-6">
         <Label htmlFor="input-thought">Enter your thought or belief:</Label>
         <div className="mt-2">
-          <textarea
+          <Textarea
             id="input-thought"
             className="w-full p-3 min-h-[100px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-nuno-purple"
             value={inputThought}
