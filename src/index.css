@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
@@ -93,7 +94,6 @@
   body {
     @apply bg-background text-foreground font-inter;
     font-family: 'Inter', sans-serif;
-    cursor: none;
   }
 }
 
@@ -213,14 +213,19 @@
   width: 100%;
 }
 
-button, a, input, textarea, select {
-  cursor: none;
+/* Make the default cursor visible and allow normal interactions */
+.default-cursor {
+  cursor: default !important;
 }
 
-button:hover, a:hover {
-  cursor: none;
+/* Add custom cursor only for larger screens */
+@media (min-width: 769px) {
+  .custom-cursor-active {
+    cursor: none;
+  }
 }
 
+/* Ensure interactive elements have proper cursor behavior */
 @media (max-width: 768px) {
   body {
     cursor: auto;
@@ -231,6 +236,23 @@ button:hover, a:hover {
   }
   
   button:hover, a:hover {
-    cursor: auto;
+    cursor: pointer;
   }
+}
+
+/* Enhanced design elements */
+.glass-card {
+  @apply bg-white bg-opacity-10 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg;
+}
+
+.enhanced-shadow {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.enhanced-gradient {
+  background: linear-gradient(135deg, #6B46C1 0%, #3B82F6 100%);
+}
+
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }

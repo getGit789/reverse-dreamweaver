@@ -6,6 +6,7 @@ const CustomCursor = () => {
   const [lastPosition, setLastPosition] = useState({ x: 0, y: 0 });
   const [isMoving, setIsMoving] = useState(false);
   const [direction, setDirection] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
     const updateCursorPosition = (e: MouseEvent) => {
@@ -27,10 +28,23 @@ const CustomCursor = () => {
       window.cursorTimeout = window.setTimeout(() => setIsMoving(false), 100) as unknown as number;
     };
 
+    const handleMouseOver = (e: MouseEvent) => {
+      if ((e.target as HTMLElement).tagName === 'BUTTON' || 
+          (e.target as HTMLElement).tagName === 'A' ||
+          (e.target as HTMLElement).closest('button') ||
+          (e.target as HTMLElement).closest('a')) {
+        setIsHovering(true);
+      } else {
+        setIsHovering(false);
+      }
+    };
+
     window.addEventListener('mousemove', updateCursorPosition);
+    window.addEventListener('mouseover', handleMouseOver);
     
     return () => {
       window.removeEventListener('mousemove', updateCursorPosition);
+      window.removeEventListener('mouseover', handleMouseOver);
       clearTimeout(window.cursorTimeout);
     };
   }, [position, lastPosition]);
@@ -57,18 +71,19 @@ const CustomCursor = () => {
   return (
     <>
       <div 
-        className="fixed w-6 h-6 rounded-full pointer-events-none z-50 mix-blend-difference"
+        className={`fixed w-${isHovering ? '10' : '6'} h-${isHovering ? '10' : '6'} rounded-full pointer-events-none z-[9999] mix-blend-difference transition-all duration-200`}
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
           background: 'white',
           transform: 'translate(-50%, -50%)',
-          transition: 'width 0.2s, height 0.2s, opacity 0.2s',
+          width: isHovering ? '2rem' : '1.5rem',
+          height: isHovering ? '2rem' : '1.5rem',
           opacity: 0.7
         }}
       />
       <div 
-        className="fixed pointer-events-none z-50 bg-white rounded-full mix-blend-difference"
+        className="fixed pointer-events-none z-[9999] bg-white rounded-full mix-blend-difference"
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,

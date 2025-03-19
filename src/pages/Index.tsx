@@ -8,23 +8,49 @@ import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
 import useScrollAnimation from '@/hooks/useScrollAnimation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const Index = () => {
   // Initialize scroll animations
   useScrollAnimation();
   
-  // Ensure smooth scrolling
+  // State to track if custom cursor should be shown
+  const [showCustomCursor, setShowCustomCursor] = useState(false);
+  
+  // Ensure smooth scrolling and setup cursor
   useEffect(() => {
+    // Smooth scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Only enable custom cursor on desktop
+    const handleResize = () => {
+      setShowCustomCursor(window.innerWidth >= 768);
+    };
+    
+    // Initial check
+    handleResize();
+    
+    // Listen for window resize
+    window.addEventListener('resize', handleResize);
+    
+    // Add custom cursor class to body
+    if (window.innerWidth >= 768) {
+      document.body.classList.add('custom-cursor-active');
+    } else {
+      document.body.classList.remove('custom-cursor-active');
+    }
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      document.body.classList.remove('custom-cursor-active');
+    };
   }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Custom cursor for desktop only */}
-      <div className="hidden md:block">
-        <CustomCursor />
-      </div>
+      {/* Only render custom cursor on desktop */}
+      {showCustomCursor && <CustomCursor />}
+      
       <Navbar />
       <main className="flex-grow">
         <Hero />
