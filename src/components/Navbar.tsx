@@ -32,8 +32,13 @@ const Navbar = () => {
           <Link to="/thought-reverser" className="text-gray-700 hover:text-nuno-purple font-medium transition-colors duration-200">
             Thought Reverser
           </Link>
-          <Button className="enhanced-gradient text-white hover:opacity-90 shadow-md">
-            Try Now
+          <Link to="/about" className="text-gray-700 hover:text-nuno-purple font-medium transition-colors duration-200">
+            About
+          </Link>
+          <Button className="enhanced-gradient text-white hover:opacity-90 shadow-md" asChild>
+            <Link to="/text-reverser">
+              Try Now
+            </Link>
           </Button>
         </nav>
 
@@ -79,8 +84,17 @@ const Navbar = () => {
             >
               Thought Reverser
             </Link>
-            <Button className="enhanced-gradient text-white hover:opacity-90 w-full py-6 shadow-md">
-              Try Now
+            <Link 
+              to="/about" 
+              className="text-lg text-gray-700 hover:text-nuno-purple font-medium"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              About
+            </Link>
+            <Button className="enhanced-gradient text-white hover:opacity-90 w-full py-6 shadow-md" asChild>
+              <Link to="/text-reverser" onClick={() => setIsMenuOpen(false)}>
+                Try Now
+              </Link>
             </Button>
           </nav>
         </div>

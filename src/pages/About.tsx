@@ -1,11 +1,18 @@
-
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Wand } from 'lucide-react';
+import { Wand, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import CustomCursor from '@/components/CustomCursor';
+import { 
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator
+} from "@/components/ui/breadcrumb";
 
 const About = () => {
   // Initialize state
@@ -51,8 +58,25 @@ const About = () => {
       
       <Navbar />
       <main className="flex-grow">
+        {/* Breadcrumb Navigation */}
+        <div className="max-w-7xl mx-auto pt-24 px-6">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to="/"><Home className="h-3.5 w-3.5" /></Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>About</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+        
         {/* Hero Section */}
-        <section className="w-full pt-32 pb-20 px-6 relative overflow-hidden">
+        <section className="w-full pt-10 pb-20 px-6 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-gray-900 opacity-10 -z-10"></div>
           <div className="absolute inset-0 -z-10">
             <div className="absolute inset-0 opacity-20" 
@@ -209,6 +233,27 @@ const About = () => {
                   Today, we're dedicated to helping people around the world discover new insights through the simple act of reversal.
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section className="w-full py-16 px-6 bg-gray-50">
+          <div className="max-w-7xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-8 text-gradient bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">Ready to Get Started?</h2>
+            <p className="text-xl text-gray-700 max-w-2xl mx-auto mb-10">
+              Experience the power of reversed perspectives with our innovative tools.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button variant="gradient" className="shadow-lg" asChild>
+                <Link to="/text-reverser">Try Text Reverser</Link>
+              </Button>
+              <Button variant="outline" className="border-purple-400 text-purple-700" asChild>
+                <Link to="/image-reverser">Try Image Reverser</Link>
+              </Button>
+              <Button variant="outline" className="border-purple-400 text-purple-700" asChild>
+                <Link to="/thought-reverser">Try Thought Reverser</Link>
+              </Button>
             </div>
           </div>
         </section>

@@ -42,19 +42,19 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-4">Connect</h3>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="text-gray-600 hover:text-nuno-purple">
-                Twitter
-              </a>
+              <Link to="/about" className="text-gray-600 hover:text-nuno-purple">
+                About Us
+              </Link>
             </li>
             <li>
-              <a href="#" className="text-gray-600 hover:text-nuno-purple">
-                Instagram
-              </a>
+              <Link to="/text-reverser" className="text-gray-600 hover:text-nuno-purple">
+                Get Started
+              </Link>
             </li>
             <li>
-              <a href="#" className="text-gray-600 hover:text-nuno-purple">
+              <Link to="/about" className="text-gray-600 hover:text-nuno-purple">
                 Contact Us
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
