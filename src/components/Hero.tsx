@@ -79,13 +79,13 @@ const Hero = () => {
         
         <div className={`flex flex-col sm:flex-row gap-4 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
           <Button 
-            className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:opacity-90 px-6 py-6 group hover-lift relative overflow-hidden shadow-lg"
+            className="px-6 py-6 group hover-lift relative overflow-hidden shadow-lg"
+            variant="gradient"
             asChild
           >
             <Link to="/text-reverser" className="flex items-center">
               <span className="relative z-10">Try Text Reverser</span>
               <ArrowRight size={16} className="ml-2 relative z-10 group-hover:translate-x-1 transition-transform" />
-              <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="absolute top-0 left-0 w-20 h-20 bg-white/20 rotate-45 transform -translate-x-32 -translate-y-8 group-hover:translate-x-64 group-hover:translate-y-8 transition-all duration-700"></div>
             </Link>
           </Button>

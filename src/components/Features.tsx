@@ -52,7 +52,7 @@ const FeatureCard = ({ feature, index }: { feature: any, index: number }) => {
         <p className="text-gray-600 mb-4">{feature.description}</p>
         <Link 
           to={feature.link} 
-          className="inline-flex items-center text-nuno-purple hover:underline font-medium group"
+          className="inline-flex items-center text-nuno-purple hover:text-purple-700 font-medium group transition-colors"
         >
           <span>Try it now</span>
           <ArrowRight 

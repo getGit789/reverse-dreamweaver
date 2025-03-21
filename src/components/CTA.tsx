@@ -38,7 +38,7 @@ const CTA = () => {
           Unlock new ways of seeing with our suite of reversal tools.
         </p>
         <Button 
-          className="bg-white text-pink-600 hover:bg-opacity-90 px-6 py-6 text-lg glow-effect shadow-xl fade-in-on-scroll stagger-delay-2 group"
+          className="bg-white text-pink-600 hover:bg-white/90 px-6 py-6 text-lg glow-effect shadow-xl fade-in-on-scroll stagger-delay-2 group"
           asChild
         >
           <Link to="/text-reverser" className="flex items-center">
