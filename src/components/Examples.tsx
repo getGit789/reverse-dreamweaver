@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -203,16 +204,17 @@ const ParallaxSection = () => {
       ref={sectionRef}
       className="relative h-[60vh] flex items-center justify-center overflow-hidden my-16"
     >
+      {/* Updated background color to match the site's blue-to-purple-to-pink gradient */}
       <div 
         className="absolute inset-0 -z-10" 
         style={{
-          backgroundImage: 'linear-gradient(135deg, #1a103c 0%, #0c3a6d 100%)',
+          backgroundImage: 'linear-gradient(135deg, #4361ee 0%, #7209b7 50%, #f72585 100%)',
           transform: `translateY(${offset * 0.5}px)`
         }}
       ></div>
       
       <div 
-        className="absolute inset-0 -z-10 opacity-10" 
+        className="absolute inset-0 -z-10 opacity-20" 
         style={{
           backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.8) 10%, transparent 70%)',
           transform: `translateY(${offset * -0.7}px) translateX(${mousePosition.x * 20}px) scale(${1 + Math.abs(offset) * 0.003})`
@@ -222,7 +224,7 @@ const ParallaxSection = () => {
       {Array.from({ length: 20 }).map((_, i) => (
         <div 
           key={i}
-          className="absolute rounded-full bg-white/20"
+          className="absolute rounded-full bg-white/30"
           style={{
             width: `${Math.random() * 10 + 5}px`,
             height: `${Math.random() * 10 + 5}px`,
@@ -238,7 +240,7 @@ const ParallaxSection = () => {
       <div 
         className="text-center text-white max-w-3xl mx-auto px-8 py-12 z-10 rounded-xl glass-effect border border-white/20 shadow-xl"
         style={{
-          background: 'rgba(0,0,0,0.6)',
+          background: 'rgba(0,0,0,0.4)',
           backdropFilter: 'blur(10px)',
           transform: `translateX(${mousePosition.x * -15}px) translateY(${mousePosition.y * -15}px)`,
           transition: 'transform 0.1s ease-out'
