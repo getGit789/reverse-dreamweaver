@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,12 +36,12 @@ const Navbar = () => {
       isScrolled ? 'bg-white/95 shadow-md backdrop-blur-md' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <Link to="/" className="flex items-center relative z-[101]">
+        <Link to="/" className="flex items-center relative z-[101] min-w-0 md:min-w-[200px]">
           <div className="flex items-center space-x-2">
             <div className="h-9 w-9 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 flex items-center justify-center text-white font-bold text-lg">
               N
             </div>
-            <h1 className={`text-2xl font-bold transition-colors duration-300 ${
+            <h1 className={`hidden md:block text-2xl font-bold transition-colors duration-300 ${
               isScrolled ? 'text-gray-800' : 'text-gradient bg-gradient-to-r from-purple-600 to-indigo-600'
             }`}>
               NunoReverse
@@ -50,7 +50,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8 relative z-[101]">
+        <nav className="hidden md:flex items-center justify-center flex-1 relative z-[101]">
           {[
             { path: '/', label: 'Home' },
             { path: '/thought-reverser', label: 'Thought Reverser' },
@@ -60,7 +60,7 @@ const Navbar = () => {
             <Link 
               key={item.path}
               to={item.path} 
-              className={`font-medium transition-colors duration-200 relative ${
+              className={`font-medium transition-colors duration-200 relative px-4 ${
                 isActive(item.path) 
                   ? 'text-purple-600' 
                   : 'text-gray-700 hover:text-purple-600'
@@ -72,13 +72,10 @@ const Navbar = () => {
               )}
             </Link>
           ))}
-          
-          <Button className="enhanced-gradient shadow-md hover-lift" asChild>
-            <Link to="/thought-reverser">
-              Try Now
-            </Link>
-          </Button>
         </nav>
+
+        {/* Spacer div to balance the logo */}
+        <div className="hidden md:block min-w-[200px]"></div>
 
         {/* Mobile Menu Button */}
         <button 
@@ -113,12 +110,29 @@ const Navbar = () => {
                 {item.label}
               </Link>
             ))}
-            
-            <Button className="enhanced-gradient text-white hover:opacity-90 w-full py-6 shadow-md" asChild>
-              <Link to="/thought-reverser" onClick={() => setIsMenuOpen(false)}>
-                Try Now
-              </Link>
-            </Button>
+            <div className="pt-4 border-t border-gray-200">
+              <SignedOut>
+                <SignInButton mode="modal">
+                  <button className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-md transition-colors">
+                    Sign In
+                  </button>
+                </SignInButton>
+              </SignedOut>
+              <SignedIn>
+                <div className="flex items-center space-x-3">
+                  <UserButton 
+                    afterSignOutUrl="/" 
+                    appearance={{
+                      elements: {
+                        userButtonAvatarBox: "w-10 h-10",
+                        userButtonTrigger: "cursor-pointer"
+                      }
+                    }}
+                  />
+                  <span className="text-gray-700 font-medium">My Account</span>
+                </div>
+              </SignedIn>
+            </div>
           </nav>
         </div>
       )}
