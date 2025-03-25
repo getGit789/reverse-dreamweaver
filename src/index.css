@@ -171,3 +171,36 @@
 .hover-lift:hover {
   transform: translateY(-4px);
 }
+
+/* NEW: Add smooth section transitions */
+section + section {
+  position: relative;
+}
+
+section + section::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(128, 90, 213, 0.2), transparent);
+}
+
+/* NEW: Card hover effects */
+.feature-card-hover {
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.feature-card-hover:hover {
+  border-color: rgba(128, 90, 213, 0.3);
+  box-shadow: 0 10px 40px -10px rgba(128, 90, 213, 0.3);
+}
+
+/* NEW: Glass card effect */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
