@@ -1,7 +1,36 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+
+const FloatingBubble = ({ delay, duration, size, left, top }: { delay: number; duration: number; size: number; left: number; top: number }) => (
+  <div
+    className="fixed rounded-full bg-purple-400/15 backdrop-blur-sm border border-purple-300/20 animate-float"
+    style={{
+      width: `${size}px`,
+      height: `${size}px`,
+      left: `${left}%`,
+      top: `${top}%`,
+      animationDelay: `${delay}s`,
+      animationDuration: `${duration}s`,
+      transform: 'translate3d(0, 0, 0)',
+      willChange: 'transform'
+    }}
+  />
+);
+
+// Generate bubbles outside component to prevent regeneration on re-render
+const generateBubbles = (count: number) => {
+  return Array.from({ length: count }).map(() => ({
+    size: Math.random() * 40 + 20, // 20-60px
+    left: Math.random() * 90 + 5, // 5-95%
+    top: Math.random() * 90 + 5, // 5-95%
+    delay: Math.random() * 5, // 0-5s delay
+    duration: Math.random() * 4 + 10, // 10-14s duration
+  }));
+};
+
+const BUBBLES = generateBubbles(15);
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -33,7 +62,21 @@ const Hero = () => {
           }}
         ></div>
         
-        {/* Animated orbs - reduced for mobile */}
+        {/* Animated bubbles for mobile */}
+        <div className="block sm:hidden fixed inset-0 overflow-hidden pointer-events-none">
+          {BUBBLES.map((bubble, i) => (
+            <FloatingBubble
+              key={i}
+              size={bubble.size}
+              left={bubble.left}
+              top={bubble.top}
+              delay={bubble.delay}
+              duration={bubble.duration}
+            />
+          ))}
+        </div>
+        
+        {/* Animated orbs - for desktop */}
         {Array.from({ length: 6 }).map((_, i) => (
           <div 
             key={i}

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -27,11 +26,29 @@ const Examples = () => {
         
         <div className="rounded-xl bg-white shadow-xl border border-gray-100 overflow-hidden fade-in-on-scroll stagger-delay-1">
           <Tabs defaultValue="text" className="w-full">
-            <div className="px-4 sm:px-6 pt-4 border-b">
-              <TabsList className="h-14">
-                <TabsTrigger value="text" className="text-base rounded-lg data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700">Text Examples</TabsTrigger>
-                <TabsTrigger value="image" className="text-base rounded-lg data-[state=active]:bg-blue-100 data-[state=active]:text-blue-700">Image Examples</TabsTrigger>
-                <TabsTrigger value="thought" className="text-base rounded-lg data-[state=active]:bg-pink-100 data-[state=active]:text-pink-700">Thought Examples</TabsTrigger>
+            <div className="px-2 sm:px-6 pt-4 border-b">
+              <TabsList className="h-14 w-full grid grid-cols-3 gap-1">
+                <TabsTrigger 
+                  value="text" 
+                  className="text-sm sm:text-base rounded-lg data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 px-2 sm:px-4"
+                >
+                  Text
+                  <span className="hidden sm:inline"> Examples</span>
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="image" 
+                  className="text-sm sm:text-base rounded-lg data-[state=active]:bg-blue-100 data-[state=active]:text-blue-700 px-2 sm:px-4"
+                >
+                  Image
+                  <span className="hidden sm:inline"> Examples</span>
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="thought" 
+                  className="text-sm sm:text-base rounded-lg data-[state=active]:bg-pink-100 data-[state=active]:text-pink-700 px-2 sm:px-4"
+                >
+                  Thought
+                  <span className="hidden sm:inline"> Examples</span>
+                </TabsTrigger>
               </TabsList>
             </div>
             
