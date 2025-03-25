@@ -121,14 +121,14 @@ const Hero = () => {
           </div>
           
           {/* Subtitle */}
-          <p className={`text-lg sm:text-lg md:text-xl text-gray-700 max-w-2xl mb-6 sm:mb-8 md:mb-12 transition-all duration-1000 px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
+          <p className={`text-lg sm:text-lg md:text-xl text-gray-700 max-w-2xl mb-4 sm:mb-8 md:mb-12 transition-all duration-1000 px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
             Flip text, mirror images, and see your thoughts from a different angle. 
             <span className="text-purple-600 font-medium"> Discover new insights with NunoReverse.</span>
           </p>
         </div>
 
         {/* Bottom section with CTA and stats */}
-        <div className="w-full flex flex-col items-center space-y-6 md:space-y-12 -mt-4 sm:mt-0">
+        <div className="w-full flex flex-col items-center space-y-4 md:space-y-12 -mt-8 sm:mt-0">
           {/* CTA button */}
           <div className={`flex flex-col items-center sm:flex-row gap-4 transition-all duration-1000 delay-300 w-full sm:w-auto px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
             <Button 
@@ -144,7 +144,7 @@ const Hero = () => {
           </div>
           
           {/* Stats or trust indicators */}
-          <div className={`grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-3xl w-full transition-all duration-1000 delay-500 px-4 mt-4 sm:mt-0 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
+          <div className={`grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-6 md:gap-8 max-w-3xl w-full transition-all duration-1000 delay-500 px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
             {[
               { number: "10K+", label: "Texts Reversed" },
               { number: "4.9", label: "User Rating" },
