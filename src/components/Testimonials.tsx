@@ -5,35 +5,64 @@ import { Star } from 'lucide-react';
 const testimonials = [
   {
     id: 1,
-    text: "NunoReverse helped me see my writing from a new angle. The text reverser tool is surprisingly insightful!",
-    author: "Alex Morgan",
-    role: "Content Creator",
-    avatar: "/placeholder.svg"
+    text: "The text reverser is so fun to use! I love how it helps me come up with creative captions for my social media posts. Sometimes reversing text gives me totally unexpected ideas! 😊",
+    author: "Isabella Rodriguez",
+    role: "Social Media Manager",
+    avatar: "/images/testimonials/isabella.jpg",
+    stars: 5
   },
   {
     id: 2,
-    text: "The image reverser tool is perfect for my design work. It helps me spot asymmetries I wouldn't otherwise notice.",
-    author: "Jamie Chen",
+    text: "As a graphic designer, the image mirror tool is a game-changer for my creative process. It helps me spot asymmetry in my designs and creates interesting perspectives I wouldn't have thought of.",
+    author: "Amara Thompson",
     role: "Graphic Designer",
-    avatar: "/placeholder.svg"
+    avatar: "/images/testimonials/amara.jpg",
+    stars: 5
   },
   {
     id: 3,
-    text: "I use the thought reverser daily to challenge my assumptions. It's been a game-changer for my problem-solving.",
-    author: "Sam Taylor",
-    role: "Product Manager",
-    avatar: "/placeholder.svg"
+    text: "Pretty handy tool for brainstorming sessions. The thought reverser helps me look at problems from different angles. Not revolutionary, but definitely useful for creative blocks.",
+    author: "Michael Bennett",
+    role: "Content Strategist",
+    avatar: "/images/testimonials/michael.jpg",
+    stars: 4.5
   }
 ];
+
+const StarRating = ({ rating }: { rating: number }) => {
+  return (
+    <div className="flex">
+      {[...Array(5)].map((_, i) => {
+        if (i + 1 <= rating) {
+          // Full star
+          return <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />;
+        } else if (i + 0.5 === rating) {
+          // Half star
+          return (
+            <div key={i} className="relative">
+              <Star className="h-5 w-5 text-yellow-400" />
+              <div className="absolute inset-0 overflow-hidden w-[50%]">
+                <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+              </div>
+            </div>
+          );
+        } else {
+          // Empty star
+          return <Star key={i} className="h-5 w-5 text-yellow-400" />;
+        }
+      })}
+    </div>
+  );
+};
 
 const Testimonials = () => {
   return (
     <section className="w-full py-16 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12 fade-in-on-scroll">
-          <h2 className="text-3xl font-bold mb-4">What People Are Saying</h2>
+          <h2 className="text-3xl font-bold mb-4">What Our Users Say</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            See how NunoReverse is helping people gain new perspectives.
+            Real experiences from creative professionals using NunoReverse.
           </p>
         </div>
 
@@ -45,20 +74,18 @@ const Testimonials = () => {
                 className={`shadow-md hover-lift scale-in-on-scroll stagger-delay-${idx + 1}`}
               >
                 <CardContent className="p-6">
-                  <div className="flex mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <p className="text-gray-700 mb-6">"{testimonial.text}"</p>
+                  <StarRating rating={testimonial.stars} />
+                  <p className="text-gray-700 my-6 min-h-[80px]">"{testimonial.text}"</p>
                   <div className="flex items-center">
-                    <Avatar className="h-10 w-10 mr-4">
+                    <Avatar className="h-12 w-12 mr-4 border-2 border-purple-100">
                       <AvatarImage src={testimonial.avatar} alt={testimonial.author} />
-                      <AvatarFallback>{testimonial.author[0]}</AvatarFallback>
+                      <AvatarFallback className="bg-purple-100 text-purple-700">
+                        {testimonial.author.split(' ').map(n => n[0]).join('')}
+                      </AvatarFallback>
                     </Avatar>
                     <div>
-                      <h4 className="font-semibold">{testimonial.author}</h4>
-                      <p className="text-sm text-gray-500">{testimonial.role}</p>
+                      <h4 className="font-semibold text-gray-900">{testimonial.author}</h4>
+                      <p className="text-sm text-gray-600">{testimonial.role}</p>
                     </div>
                   </div>
                 </CardContent>

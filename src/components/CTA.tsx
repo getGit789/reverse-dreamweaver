@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -72,7 +71,13 @@ const CTA = () => {
               Seeing my ideas in reverse unlocked solutions I never would have found otherwise."
             </p>
             <div className="mt-4 flex items-center justify-center">
-              <div className="h-10 w-10 rounded-full bg-white/20 mr-3"></div>
+              <div className="h-12 w-12 rounded-full bg-white/10 border-2 border-white/20 overflow-hidden mr-3">
+                <img 
+                  src="/images/testimonials/sarah.jpg" 
+                  alt="Sarah Johnson"
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <div className="text-left">
                 <div className="text-white font-medium">Sarah Johnson</div>
                 <div className="text-white/70 text-sm">Creative Director</div>
