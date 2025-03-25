@@ -56,8 +56,7 @@ const Navbar = () => {
             { path: '/', label: 'Home' },
             { path: '/text-reverser', label: 'Text Reverser' },
             { path: '/image-reverser', label: 'Image Reverser' },
-            { path: '/thought-reverser', label: 'Thought Reverser' },
-            { path: '/about', label: 'About' }
+            { path: '/thought-reverser', label: 'Thought Reverser' }
           ].map((item) => (
             <Link 
               key={item.path}
@@ -100,8 +99,7 @@ const Navbar = () => {
               { path: '/', label: 'Home' },
               { path: '/text-reverser', label: 'Text Reverser' },
               { path: '/image-reverser', label: 'Image Reverser' },
-              { path: '/thought-reverser', label: 'Thought Reverser' },
-              { path: '/about', label: 'About' }
+              { path: '/thought-reverser', label: 'Thought Reverser' }
             ].map((item) => (
               <Link 
                 key={item.path}

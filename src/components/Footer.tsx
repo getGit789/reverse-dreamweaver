@@ -6,8 +6,8 @@ const Footer = () => {
 
   return (
     <footer className="w-full py-8 px-6 bg-gradient-to-br from-gray-50 to-indigo-50/50">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div className="col-span-1 md:col-span-2">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="col-span-1 md:col-span-1">
           <Link to="/" className="flex items-center">
             <h1 className="text-2xl font-bold text-gradient bg-gradient-to-r from-purple-600 to-indigo-600">NunoReverse</h1>
           </Link>
@@ -42,19 +42,14 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-4 text-gray-800">Connect</h3>
           <ul className="space-y-2">
             <li>
-              <Link to="/about" className="text-gray-600 hover:text-nuno-purple transition-colors">
-                About Us
-              </Link>
-            </li>
-            <li>
               <Link to="/text-reverser" className="text-gray-600 hover:text-nuno-purple transition-colors">
                 Get Started
               </Link>
             </li>
             <li>
-              <Link to="/" className="text-gray-600 hover:text-nuno-purple transition-colors">
+              <a href="mailto:contact@nunoreverse.com" className="text-gray-600 hover:text-nuno-purple transition-colors">
                 Contact Us
-              </Link>
+              </a>
             </li>
           </ul>
         </div>

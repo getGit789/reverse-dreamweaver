@@ -53,7 +53,7 @@ const CTA = () => {
           Unlock new ways of seeing with our suite of powerful reversal tools.
         </p>
         
-        <div className="flex flex-col md:flex-row gap-4 justify-center fade-in-on-scroll stagger-delay-2">
+        <div className="flex justify-center fade-in-on-scroll stagger-delay-2">
           <Button 
             className="bg-white text-purple-600 hover:bg-white/90 px-8 py-7 text-lg shadow-xl group"
             asChild
@@ -62,14 +62,6 @@ const CTA = () => {
               Get Started 
               <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Link>
-          </Button>
-          
-          <Button 
-            variant="outline"
-            className="border-white text-white hover:bg-white/20 px-8 py-7 text-lg backdrop-blur-sm"
-            asChild
-          >
-            <Link to="/about">Learn More</Link>
           </Button>
         </div>
         

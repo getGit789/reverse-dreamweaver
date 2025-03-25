@@ -88,7 +88,7 @@ const Hero = () => {
           <span className="text-purple-600 font-medium"> Discover new insights with NunoReverse.</span>
         </p>
         
-        {/* CTA buttons */}
+        {/* CTA buttons - Removed Learn More button */}
         <div className={`flex flex-col sm:flex-row gap-4 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
           <Button 
             className="px-8 py-7 text-lg group relative overflow-hidden shadow-lg enhanced-gradient hover-lift"
@@ -98,18 +98,6 @@ const Hero = () => {
               <span className="relative z-10">Try Text Reverser</span>
               <ArrowRight size={18} className="ml-2 relative z-10 group-hover:translate-x-1 transition-transform" />
               <div className="absolute top-0 left-0 w-20 h-full bg-white/20 transform -translate-x-full skew-x-12 group-hover:translate-x-[250%] transition-all duration-700"></div>
-            </Link>
-          </Button>
-          
-          <Button 
-            variant="outline" 
-            className="border-purple-400 text-purple-700 hover:bg-purple-50 px-8 py-7 text-lg hover-lift backdrop-blur-sm relative overflow-hidden group"
-            asChild
-          >
-            <Link to="/about" className="flex items-center">
-              <span className="relative z-10">Learn More</span>
-              <Sparkles size={18} className="ml-2 text-purple-500 relative z-10" />
-              <div className="absolute inset-0 bg-purple-100/50 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </Link>
           </Button>
         </div>
