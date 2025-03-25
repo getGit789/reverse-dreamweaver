@@ -36,7 +36,7 @@ const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeText, setActiveText] = useState(0);
   const textOptions = [
-    "Reverse Your Perspective",
+    "Reverse Your\nPerspective",
     "Transform Your Vision",
     "Reimagine Everything"
   ];
@@ -50,7 +50,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="w-full min-h-[100vh] flex flex-col justify-between pt-12 sm:pt-16 md:pt-36 pb-8 md:pb-24 px-4 md:px-6 relative overflow-hidden">
+    <section className="w-full min-h-[100vh] flex flex-col justify-start pt-12 sm:pt-16 md:pt-36 pb-8 md:pb-24 px-4 md:px-6 relative overflow-hidden">
       {/* Gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-white via-purple-50 to-indigo-50 -z-10"></div>
       
@@ -101,7 +101,7 @@ const Hero = () => {
         {/* Main content wrapper */}
         <div className="flex flex-col items-center justify-center flex-1 w-full mt-4 sm:mt-8 md:mt-0">
           {/* Animated headline */}
-          <div className="relative min-h-[4rem] sm:min-h-[4.5rem] md:min-h-[7rem] mb-4 sm:mb-6 md:mb-8 w-full overflow-hidden">
+          <div className="relative min-h-[5.5rem] sm:min-h-[4.5rem] md:min-h-[7rem] mb-4 sm:mb-6 md:mb-8 w-full overflow-hidden">
             {textOptions.map((text, index) => (
               <h1 
                 key={index}
@@ -113,7 +113,7 @@ const Hero = () => {
                       : 'translate-y-full opacity-0'
                 }`}
               >
-                <span className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-500 leading-tight md:leading-normal">
+                <span className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-500 leading-tight md:leading-normal whitespace-pre-line">
                   {text}
                 </span>
               </h1>
@@ -121,18 +121,18 @@ const Hero = () => {
           </div>
           
           {/* Subtitle */}
-          <p className={`text-lg sm:text-lg md:text-xl text-gray-700 max-w-2xl mb-8 sm:mb-8 md:mb-12 transition-all duration-1000 px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
+          <p className={`text-lg sm:text-lg md:text-xl text-gray-700 max-w-2xl mb-6 sm:mb-8 md:mb-12 transition-all duration-1000 px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
             Flip text, mirror images, and see your thoughts from a different angle. 
             <span className="text-purple-600 font-medium"> Discover new insights with NunoReverse.</span>
           </p>
         </div>
 
         {/* Bottom section with CTA and stats */}
-        <div className="w-full flex flex-col items-center space-y-8 md:space-y-12">
+        <div className="w-full flex flex-col items-center space-y-6 md:space-y-12 -mt-4 sm:mt-0">
           {/* CTA button */}
           <div className={`flex flex-col items-center sm:flex-row gap-4 transition-all duration-1000 delay-300 w-full sm:w-auto px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
             <Button 
-              className="px-4 sm:px-6 md:px-8 py-5 sm:py-6 md:py-7 text-sm sm:text-base md:text-lg group relative overflow-hidden shadow-lg enhanced-gradient hover-lift w-full sm:w-auto"
+              className="px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-7 text-base sm:text-base md:text-lg group relative overflow-hidden shadow-lg enhanced-gradient hover-lift w-full sm:w-auto"
               asChild
             >
               <Link to="/text-reverser" className="flex items-center justify-center">
