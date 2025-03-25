@@ -3,14 +3,25 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { SignedIn, SignedOut, UserButton, useSignIn, useSignUp } from '@clerk/clerk-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const { signIn } = useSignIn();
+  const { signUp } = useSignUp();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+  
+  const handleSignIn = () => {
+    signIn?.redirectToSignIn();
+  };
+  
+  const handleSignUp = () => {
+    signUp?.redirectToSignUp();
   };
   
   useEffect(() => {
@@ -74,21 +85,49 @@ const Navbar = () => {
             </Link>
           ))}
           
-          <Button className="enhanced-gradient shadow-md hover-lift" asChild>
-            <Link to="/text-reverser">
-              Try Now
-            </Link>
-          </Button>
+          <SignedIn>
+            <UserButton
+              appearance={{
+                elements: {
+                  userButtonAvatarBox: "w-10 h-10"
+                }
+              }}
+            />
+          </SignedIn>
+          
+          <SignedOut>
+            <div className="flex items-center space-x-4">
+              <Button variant="ghost" onClick={handleSignIn}>
+                Sign In
+              </Button>
+              
+              <Button className="enhanced-gradient shadow-md hover-lift" onClick={handleSignUp}>
+                Sign Up
+              </Button>
+            </div>
+          </SignedOut>
         </nav>
 
         {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden text-gray-700 relative z-[101] p-2" 
-          onClick={toggleMenu}
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="md:hidden flex items-center space-x-4 relative z-[101]">
+          <SignedIn>
+            <UserButton
+              appearance={{
+                elements: {
+                  userButtonAvatarBox: "w-9 h-9"
+                }
+              }}
+            />
+          </SignedIn>
+          
+          <button 
+            className="text-gray-700 p-2" 
+            onClick={toggleMenu}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -115,11 +154,24 @@ const Navbar = () => {
               </Link>
             ))}
             
-            <Button className="enhanced-gradient text-white hover:opacity-90 w-full py-6 shadow-md" asChild>
-              <Link to="/text-reverser" onClick={() => setIsMenuOpen(false)}>
-                Try Now
-              </Link>
-            </Button>
+            <SignedOut>
+              <div className="flex flex-col space-y-4 pt-4">
+                <Button 
+                  variant="outline" 
+                  className="w-full border-purple-600 text-purple-600" 
+                  onClick={handleSignIn}
+                >
+                  Sign In
+                </Button>
+                
+                <Button 
+                  className="enhanced-gradient text-white hover:opacity-90 w-full shadow-md" 
+                  onClick={handleSignUp}
+                >
+                  Sign Up
+                </Button>
+              </div>
+            </SignedOut>
           </nav>
         </div>
       )}
