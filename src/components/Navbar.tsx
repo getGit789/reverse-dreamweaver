@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
@@ -54,9 +53,9 @@ const Navbar = () => {
         <nav className="hidden md:flex items-center space-x-8 relative z-[101]">
           {[
             { path: '/', label: 'Home' },
-            { path: '/text-reverser', label: 'Text Reverser' },
+            { path: '/thought-reverser', label: 'Thought Reverser' },
             { path: '/image-reverser', label: 'Image Reverser' },
-            { path: '/thought-reverser', label: 'Thought Reverser' }
+            { path: '/text-reverser', label: 'Text Reverser' }
           ].map((item) => (
             <Link 
               key={item.path}
@@ -75,7 +74,7 @@ const Navbar = () => {
           ))}
           
           <Button className="enhanced-gradient shadow-md hover-lift" asChild>
-            <Link to="/text-reverser">
+            <Link to="/thought-reverser">
               Try Now
             </Link>
           </Button>
@@ -97,9 +96,9 @@ const Navbar = () => {
           <nav className="flex flex-col space-y-6">
             {[
               { path: '/', label: 'Home' },
-              { path: '/text-reverser', label: 'Text Reverser' },
+              { path: '/thought-reverser', label: 'Thought Reverser' },
               { path: '/image-reverser', label: 'Image Reverser' },
-              { path: '/thought-reverser', label: 'Thought Reverser' }
+              { path: '/text-reverser', label: 'Text Reverser' }
             ].map((item) => (
               <Link 
                 key={item.path}
@@ -116,7 +115,7 @@ const Navbar = () => {
             ))}
             
             <Button className="enhanced-gradient text-white hover:opacity-90 w-full py-6 shadow-md" asChild>
-              <Link to="/text-reverser" onClick={() => setIsMenuOpen(false)}>
+              <Link to="/thought-reverser" onClick={() => setIsMenuOpen(false)}>
                 Try Now
               </Link>
             </Button>

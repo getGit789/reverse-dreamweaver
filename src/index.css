@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -256,4 +255,9 @@ section + section::before {
 /* NEW: Text shadow for better contrast */
 .text-shadow {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient background for cards and buttons */
+.gradient-bg {
+  background: linear-gradient(135deg, #805AD5 0%, #6B46C1 100%);
 }
