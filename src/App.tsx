@@ -9,9 +9,6 @@ import TextReverserPage from "./pages/TextReverserPage";
 import ImageReverserPage from "./pages/ImageReverserPage";
 import ThoughtReverserPage from "./pages/ThoughtReverserPage";
 import NotFound from "./pages/NotFound";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
-import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -23,32 +20,9 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route 
-            path="/text-reverser" 
-            element={
-              <ProtectedRoute>
-                <TextReverserPage />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/image-reverser" 
-            element={
-              <ProtectedRoute>
-                <ImageReverserPage />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/thought-reverser" 
-            element={
-              <ProtectedRoute>
-                <ThoughtReverserPage />
-              </ProtectedRoute>
-            } 
-          />
+          <Route path="/text-reverser" element={<TextReverserPage />} />
+          <Route path="/image-reverser" element={<ImageReverserPage />} />
+          <Route path="/thought-reverser" element={<ThoughtReverserPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

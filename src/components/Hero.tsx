@@ -3,13 +3,10 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { SignedIn, SignedOut, useSignIn } from '@clerk/clerk-react';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeText, setActiveText] = useState(0);
-  const { signIn } = useSignIn();
-  
   const textOptions = [
     "Reverse Your Perspective",
     "Transform Your Vision",
@@ -23,10 +20,6 @@ const Hero = () => {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
-  
-  const handleSignIn = () => {
-    signIn?.redirectToSignIn();
-  };
 
   return (
     <section className="w-full pt-36 pb-24 px-6 relative overflow-hidden">
@@ -95,31 +88,18 @@ const Hero = () => {
           <span className="text-purple-600 font-medium"> Discover new insights with NunoReverse.</span>
         </p>
         
-        {/* CTA buttons */}
+        {/* CTA buttons - Removed Learn More button */}
         <div className={`flex flex-col sm:flex-row gap-4 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
-          <SignedIn>
-            <Button 
-              className="px-8 py-7 text-lg group relative overflow-hidden shadow-lg enhanced-gradient hover-lift"
-              asChild
-            >
-              <Link to="/text-reverser" className="flex items-center">
-                <span className="relative z-10">Try Text Reverser</span>
-                <ArrowRight size={18} className="ml-2 relative z-10 group-hover:translate-x-1 transition-transform" />
-                <div className="absolute top-0 left-0 w-20 h-full bg-white/20 transform -translate-x-full skew-x-12 group-hover:translate-x-[250%] transition-all duration-700"></div>
-              </Link>
-            </Button>
-          </SignedIn>
-          
-          <SignedOut>
-            <Button 
-              className="px-8 py-7 text-lg group relative overflow-hidden shadow-lg enhanced-gradient hover-lift"
-              onClick={handleSignIn}
-            >
-              <span className="relative z-10">Sign In to Try</span>
+          <Button 
+            className="px-8 py-7 text-lg group relative overflow-hidden shadow-lg enhanced-gradient hover-lift"
+            asChild
+          >
+            <Link to="/text-reverser" className="flex items-center">
+              <span className="relative z-10">Try Text Reverser</span>
               <ArrowRight size={18} className="ml-2 relative z-10 group-hover:translate-x-1 transition-transform" />
               <div className="absolute top-0 left-0 w-20 h-full bg-white/20 transform -translate-x-full skew-x-12 group-hover:translate-x-[250%] transition-all duration-700"></div>
-            </Button>
-          </SignedOut>
+            </Link>
+          </Button>
         </div>
         
         {/* Stats or trust indicators */}

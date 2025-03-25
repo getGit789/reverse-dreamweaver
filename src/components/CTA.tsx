@@ -2,15 +2,8 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { SignedIn, SignedOut, useSignIn } from '@clerk/clerk-react';
 
 const CTA = () => {
-  const { signIn } = useSignIn();
-  
-  const handleAuthClick = () => {
-    signIn?.redirectToSignIn();
-  };
-
   return (
     <section className="w-full py-24 px-6 relative overflow-hidden">
       {/* Gradient background */}
@@ -61,30 +54,15 @@ const CTA = () => {
         </p>
         
         <div className="flex justify-center fade-in-on-scroll stagger-delay-2">
-          {/* Show different buttons based on authentication state */}
-          <SignedIn>
-            <Button 
-              className="bg-white text-purple-600 hover:bg-white/90 px-8 py-7 text-lg shadow-xl group"
-              asChild
-            >
-              <Link to="/text-reverser" className="flex items-center">
-                Get Started 
-                <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
-          </SignedIn>
-          
-          <SignedOut>
-            <Button 
-              className="bg-white text-purple-600 hover:bg-white/90 px-8 py-7 text-lg shadow-xl group"
-              onClick={handleAuthClick}
-            >
-              <span className="flex items-center">
-                Sign In to Get Started
-                <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </span>
-            </Button>
-          </SignedOut>
+          <Button 
+            className="bg-white text-purple-600 hover:bg-white/90 px-8 py-7 text-lg shadow-xl group"
+            asChild
+          >
+            <Link to="/text-reverser" className="flex items-center">
+              Get Started 
+              <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </Button>
         </div>
         
         <div className="mt-16 flex justify-center">
