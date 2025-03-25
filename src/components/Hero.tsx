@@ -50,7 +50,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="w-full min-h-[100vh] flex flex-col justify-between pt-16 md:pt-36 pb-8 md:pb-24 px-4 md:px-6 relative overflow-hidden">
+    <section className="w-full min-h-[100vh] flex flex-col justify-between pt-12 sm:pt-16 md:pt-36 pb-8 md:pb-24 px-4 md:px-6 relative overflow-hidden">
       {/* Gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-white via-purple-50 to-indigo-50 -z-10"></div>
       
@@ -99,9 +99,9 @@ const Hero = () => {
       
       <div className="flex-1 max-w-7xl mx-auto flex flex-col items-center justify-center text-center relative z-10">
         {/* Main content wrapper */}
-        <div className="flex flex-col items-center justify-center flex-1 w-full mt-12 md:mt-0">
+        <div className="flex flex-col items-center justify-center flex-1 w-full mt-4 sm:mt-8 md:mt-0">
           {/* Animated headline */}
-          <div className="relative min-h-[3.5rem] sm:min-h-[4rem] md:min-h-[7rem] mb-4 sm:mb-6 md:mb-8 w-full overflow-hidden">
+          <div className="relative min-h-[4rem] sm:min-h-[4.5rem] md:min-h-[7rem] mb-4 sm:mb-6 md:mb-8 w-full overflow-hidden">
             {textOptions.map((text, index) => (
               <h1 
                 key={index}
@@ -113,7 +113,7 @@ const Hero = () => {
                       : 'translate-y-full opacity-0'
                 }`}
               >
-                <span className="text-2xl sm:text-4xl md:text-6xl font-extrabold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-500 leading-tight md:leading-normal">
+                <span className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-500 leading-tight md:leading-normal">
                   {text}
                 </span>
               </h1>
@@ -121,7 +121,7 @@ const Hero = () => {
           </div>
           
           {/* Subtitle */}
-          <p className={`text-base sm:text-lg md:text-xl text-gray-700 max-w-2xl mb-6 sm:mb-8 md:mb-12 transition-all duration-1000 px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
+          <p className={`text-lg sm:text-lg md:text-xl text-gray-700 max-w-2xl mb-8 sm:mb-8 md:mb-12 transition-all duration-1000 px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
             Flip text, mirror images, and see your thoughts from a different angle. 
             <span className="text-purple-600 font-medium"> Discover new insights with NunoReverse.</span>
           </p>
@@ -144,7 +144,7 @@ const Hero = () => {
           </div>
           
           {/* Stats or trust indicators */}
-          <div className={`grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-3xl w-full transition-all duration-1000 delay-500 px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
+          <div className={`grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-3xl w-full transition-all duration-1000 delay-500 px-4 mt-4 sm:mt-0 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
             {[
               { number: "10K+", label: "Texts Reversed" },
               { number: "4.9", label: "User Rating" },
@@ -152,12 +152,12 @@ const Hero = () => {
             ].map((stat, i) => (
               <div 
                 key={i} 
-                className={`text-center hover-lift bg-white/50 backdrop-blur-sm rounded-lg p-3 sm:p-4 ${stat.className || ''}`}
+                className={`text-center hover-lift bg-white/50 backdrop-blur-sm rounded-lg p-4 sm:p-4 ${stat.className || ''}`}
               >
-                <div className="font-bold text-xl sm:text-2xl md:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
+                <div className="font-bold text-2xl sm:text-2xl md:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
                   {stat.number}
                 </div>
-                <div className="text-xs sm:text-sm md:text-base text-gray-600">{stat.label}</div>
+                <div className="text-sm sm:text-sm md:text-base text-gray-600">{stat.label}</div>
               </div>
             ))}
           </div>
