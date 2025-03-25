@@ -2,13 +2,14 @@
 import { ArrowRight, FileText, Image, MessageSquare, RotateCw } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
 
 const FeatureCard = ({ feature, index }: { feature: any, index: number }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div 
-      className={`bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${
+    <Card 
+      className={`overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-500 hover-lift ${
         index === 0 ? 'slide-in-from-left' : 
         index === 2 ? 'slide-in-from-right' : 
         'scale-in-on-scroll'
@@ -47,12 +48,12 @@ const FeatureCard = ({ feature, index }: { feature: any, index: number }) => {
         ></div>
       </div>
       
-      <div className="p-6 border-t border-gray-100">
+      <CardContent className="p-6 bg-white">
         <h3 className="text-xl font-bold mb-2 text-gray-800">{feature.title}</h3>
         <p className="text-gray-600 mb-4">{feature.description}</p>
         <Link 
           to={feature.link} 
-          className="inline-flex items-center text-nuno-purple hover:text-purple-700 font-medium group transition-colors"
+          className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium group transition-colors"
         >
           <span>Try it now</span>
           <ArrowRight 
@@ -60,8 +61,8 @@ const FeatureCard = ({ feature, index }: { feature: any, index: number }) => {
             className="ml-1 group-hover:translate-x-1 transition-transform duration-300" 
           />
         </Link>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 
@@ -91,11 +92,14 @@ const Features = () => {
   ];
 
   return (
-    <section className="w-full py-16 px-6 bg-gray-50 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 -z-10"></div>
+    <section className="w-full py-24 px-6 bg-gray-50 relative overflow-hidden">
+      {/* Gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-white -z-10"></div>
+      
+      {/* Decorative elements */}
       <div className="absolute inset-0 opacity-50 -z-10">
-        <div className="absolute h-56 w-56 rounded-full bg-purple-200/50 blur-3xl -top-10 -left-10 animate-pulse"></div>
-        <div className="absolute h-64 w-64 rounded-full bg-blue-200/50 blur-3xl bottom-10 right-10 animate-pulse" style={{animationDelay: '2s'}}></div>
+        <div className="absolute h-72 w-72 rounded-full bg-purple-200/50 blur-3xl -top-20 -left-20 animate-pulse"></div>
+        <div className="absolute h-80 w-80 rounded-full bg-blue-200/50 blur-3xl bottom-20 right-20 animate-pulse" style={{animationDelay: '2s'}}></div>
       </div>
       
       <div className="max-w-7xl mx-auto">
@@ -113,95 +117,6 @@ const Features = () => {
           {features.map((feature, index) => (
             <FeatureCard key={index} feature={feature} index={index} />
           ))}
-        </div>
-      </div>
-      
-      {/* NEW: Add interesting showcase section */}
-      <div className="max-w-7xl mx-auto mt-24 mb-6">
-        <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-blue-500/5"></div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 md:p-12 relative z-10">
-            <div className="fade-in-on-scroll">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-gradient bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
-                See Your World in Reverse
-              </h2>
-              
-              <p className="text-gray-700 mb-6">
-                Our reversal tools help you break through creative blocks and discover hidden patterns in your everyday life.
-              </p>
-              
-              <div className="space-y-4">
-                {[
-                  "Solve problems from a new angle",
-                  "Enhance creative thinking",
-                  "Discover hidden patterns",
-                  "Break through mental blocks"
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <div className="h-5 w-5 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 flex items-center justify-center">
-                      <div className="h-2 w-2 rounded-full bg-white"></div>
-                    </div>
-                    <p className="text-gray-700">{item}</p>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="mt-8">
-                <Link 
-                  to="/about" 
-                  className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium transition-all hover:shadow-lg hover:translate-y-[-2px]"
-                >
-                  Learn our approach
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </div>
-            </div>
-            
-            <div className="relative perspective-1000 fade-in-on-scroll stagger-delay-1">
-              <div className="absolute inset-0 opacity-40 rounded-xl overflow-hidden">
-                <div className="absolute -top-4 -left-4 w-32 h-32 bg-purple-300 rounded-full blur-xl"></div>
-                <div className="absolute bottom-10 right-10 w-40 h-40 bg-blue-300 rounded-full blur-xl"></div>
-              </div>
-              
-              <div className="relative animate-float overflow-hidden rounded-xl border border-gray-200 shadow-lg">
-                <div className="grid grid-cols-2 gap-4 p-6 bg-white">
-                  <div className="col-span-2 text-center mb-2">
-                    <h3 className="text-lg font-bold text-gray-800">Try Reversing Text</h3>
-                  </div>
-                  
-                  <div className="bg-gray-50 rounded-lg p-4 border border-gray-100">
-                    <p className="text-gray-600 mb-1 text-xs">Original</p>
-                    <p className="font-medium text-gray-800">Hello World</p>
-                  </div>
-                  
-                  <div className="bg-purple-50 rounded-lg p-4 border border-purple-100">
-                    <p className="text-purple-600 mb-1 text-xs">Reversed</p>
-                    <p className="font-medium text-gray-800">dlroW olleH</p>
-                  </div>
-                  
-                  <div className="bg-gray-50 rounded-lg p-4 border border-gray-100">
-                    <p className="text-gray-600 mb-1 text-xs">Original</p>
-                    <p className="font-medium text-gray-800">New Perspective</p>
-                  </div>
-                  
-                  <div className="bg-purple-50 rounded-lg p-4 border border-purple-100">
-                    <p className="text-purple-600 mb-1 text-xs">Reversed</p>
-                    <p className="font-medium text-gray-800">evitcepsreP weN</p>
-                  </div>
-                  
-                  <div className="col-span-2">
-                    <Link 
-                      to="/text-reverser" 
-                      className="w-full py-2 rounded-lg text-center block text-purple-600 border border-purple-200 hover:bg-purple-50 transition-colors"
-                    >
-                      Try Text Reverser
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
