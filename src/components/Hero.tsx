@@ -30,7 +30,7 @@ const generateBubbles = (count: number) => {
   }));
 };
 
-const BUBBLES = generateBubbles(15);
+const BUBBLES = generateBubbles(8);
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -50,24 +50,25 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="w-full min-h-[100vh] flex flex-col justify-start pt-12 sm:pt-16 md:pt-36 pb-8 md:pb-24 px-4 md:px-6 relative overflow-hidden">
-      {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white via-purple-50 to-indigo-50 -z-10"></div>
+    <section className="w-full min-h-screen flex flex-col justify-start pt-16 sm:pt-20 md:pt-32 pb-8 md:pb-16 px-4 md:px-6 relative overflow-hidden">
+      {/* Optimized gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white via-purple-50/80 to-indigo-50/80 -z-10" />
       
-      {/* Decorative elements */}
+      {/* Simplified decorative elements */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 opacity-20" 
+        <div 
+          className="absolute inset-0 opacity-20" 
           style={{
-            backgroundImage: 'radial-gradient(circle at 30% 20%, rgba(120, 119, 198, 0.3) 0%, transparent 60%), radial-gradient(circle at 70% 65%, rgba(33, 150, 243, 0.4) 0%, transparent 40%)'
+            backgroundImage: 'radial-gradient(circle at 30% 20%, rgba(120, 119, 198, 0.2) 0%, transparent 50%)'
           }}
-        ></div>
+        />
         
-        {/* Animated bubbles for mobile */}
+        {/* Optimized mobile bubbles */}
         <div className="block sm:hidden fixed inset-0 overflow-hidden pointer-events-none">
           {BUBBLES.map((bubble, i) => (
             <FloatingBubble
               key={i}
-              size={bubble.size}
+              size={bubble.size * 0.8} // Slightly smaller bubbles
               left={bubble.left}
               top={bubble.top}
               delay={bubble.delay}
@@ -76,8 +77,8 @@ const Hero = () => {
           ))}
         </div>
         
-        {/* Animated orbs - for desktop */}
-        {Array.from({ length: 6 }).map((_, i) => (
+        {/* Simplified desktop orbs */}
+        {Array.from({ length: 4 }).map((_, i) => (
           <div 
             key={i}
             className="animate-pulse rounded-full bg-purple-400/10 hidden sm:block"
@@ -85,23 +86,20 @@ const Hero = () => {
               position: 'absolute',
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
-              width: `${Math.random() * 100 + 50}px`,
-              height: `${Math.random() * 100 + 50}px`,
-              animationDuration: `${Math.random() * 8 + 4}s`,
-              animationDelay: `${Math.random() * 5}s`
+              width: `${Math.random() * 80 + 40}px`,
+              height: `${Math.random() * 80 + 40}px`,
+              animationDuration: `${Math.random() * 6 + 4}s`,
+              animationDelay: `${Math.random() * 3}s`
             }}
-          ></div>
+          />
         ))}
-        
-        {/* Grid pattern */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]"></div>
       </div>
       
-      <div className="flex-1 max-w-7xl mx-auto flex flex-col items-center justify-center text-center relative z-10">
-        {/* Main content wrapper */}
-        <div className="flex flex-col items-center justify-center flex-1 w-full mt-4 sm:mt-8 md:mt-0">
-          {/* Animated headline */}
-          <div className="relative min-h-[5.5rem] sm:min-h-[4.5rem] md:min-h-[7rem] mb-4 sm:mb-6 md:mb-8 w-full overflow-hidden">
+      <div className="flex-1 max-w-7xl mx-auto flex flex-col items-center justify-start text-center relative z-10">
+        {/* Main content wrapper - Improved mobile spacing */}
+        <div className="flex flex-col items-center justify-start w-full mt-8 sm:mt-12">
+          {/* Optimized animated headline */}
+          <div className="relative min-h-[4.5rem] sm:min-h-[4.5rem] md:min-h-[7rem] mb-6 w-full overflow-hidden">
             {textOptions.map((text, index) => (
               <h1 
                 key={index}
@@ -113,38 +111,37 @@ const Hero = () => {
                       : 'translate-y-full opacity-0'
                 }`}
               >
-                <span className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-500 leading-tight md:leading-normal whitespace-pre-line">
+                <span className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-500 leading-tight whitespace-pre-line">
                   {text}
                 </span>
               </h1>
             ))}
           </div>
           
-          {/* Subtitle */}
-          <p className={`text-lg sm:text-lg md:text-xl text-gray-700 max-w-2xl mb-4 sm:mb-8 md:mb-12 transition-all duration-1000 px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
+          {/* Optimized subtitle */}
+          <p className={`text-lg sm:text-xl text-gray-700 max-w-2xl mb-8 sm:mb-12 transition-all duration-700 px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
             Flip text, mirror images, and see your thoughts from a different angle. 
             <span className="text-purple-600 font-medium"> Discover new insights with NunoReverse.</span>
           </p>
         </div>
 
-        {/* Bottom section with CTA and stats */}
-        <div className="w-full flex flex-col items-center space-y-4 md:space-y-12 -mt-8 sm:mt-0">
-          {/* CTA button */}
-          <div className={`flex flex-col items-center sm:flex-row gap-4 transition-all duration-1000 delay-300 w-full sm:w-auto px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
+        {/* Optimized bottom section with CTA */}
+        <div className="w-full flex flex-col items-center space-y-8 sm:space-y-12">
+          {/* Improved CTA positioning */}
+          <div className={`flex flex-col items-center sm:flex-row gap-4 transition-all duration-700 delay-200 w-full sm:w-auto px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
             <Button 
-              className="px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-7 text-base sm:text-base md:text-lg group relative overflow-hidden shadow-lg enhanced-gradient hover-lift w-full sm:w-auto"
+              className="px-6 py-6 sm:py-6 text-base sm:text-lg group relative overflow-hidden shadow-lg enhanced-gradient hover-lift w-full sm:w-auto"
               asChild
             >
               <Link to="/text-reverser" className="flex items-center justify-center">
                 <span className="relative z-10">Try Text Reverser</span>
                 <ArrowRight size={16} className="ml-2 relative z-10 group-hover:translate-x-1 transition-transform md:w-[18px] md:h-[18px]" />
-                <div className="absolute top-0 left-0 w-20 h-full bg-white/20 transform -translate-x-full skew-x-12 group-hover:translate-x-[250%] transition-all duration-700"></div>
               </Link>
             </Button>
           </div>
           
-          {/* Stats or trust indicators */}
-          <div className={`grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-6 md:gap-8 max-w-3xl w-full transition-all duration-1000 delay-500 px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
+          {/* Optimized stats grid */}
+          <div className={`grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-6 max-w-3xl w-full transition-all duration-700 delay-300 px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
             {[
               { number: "10K+", label: "Texts Reversed" },
               { number: "4.9", label: "User Rating" },
@@ -152,23 +149,16 @@ const Hero = () => {
             ].map((stat, i) => (
               <div 
                 key={i} 
-                className={`text-center hover-lift bg-white/50 backdrop-blur-sm rounded-lg p-4 sm:p-4 ${stat.className || ''}`}
+                className={`text-center hover-lift bg-white/50 backdrop-blur-sm rounded-lg p-4 ${stat.className || ''}`}
               >
-                <div className="font-bold text-2xl sm:text-2xl md:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
+                <div className="font-bold text-xl sm:text-2xl md:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
                   {stat.number}
                 </div>
-                <div className="text-sm sm:text-sm md:text-base text-gray-600">{stat.label}</div>
+                <div className="text-sm text-gray-600">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
-      </div>
-      
-      {/* Bottom wave */}
-      <div className="absolute bottom-0 left-0 right-0 h-12 sm:h-16 -z-5">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full h-full">
-          <path fill="rgb(248 250 252)" fillOpacity="1" d="M0,256L48,229.3C96,203,192,149,288,149.3C384,149,480,203,576,218.7C672,235,768,213,864,186.7C960,160,1056,128,1152,122.7C1248,117,1344,139,1392,149.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-        </svg>
       </div>
     </section>
   );
