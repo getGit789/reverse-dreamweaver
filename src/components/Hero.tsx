@@ -1,6 +1,5 @@
-
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Sparkles, Zap } from 'lucide-react';
+import { ArrowRight, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -22,7 +21,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="w-full pt-36 pb-24 px-6 relative overflow-hidden">
+    <section className="w-full pt-24 md:pt-36 pb-24 px-4 md:px-6 relative overflow-hidden">
       {/* Gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-white via-purple-50 to-indigo-50 -z-10"></div>
       
@@ -57,25 +56,27 @@ const Hero = () => {
       
       <div className="max-w-7xl mx-auto flex flex-col items-center text-center relative z-10">
         {/* Glowing icon */}
-        <div className="relative mb-8">
+        <div className="relative mb-6 md:mb-8">
           <div className="absolute inset-0 rounded-full bg-purple-400/30 blur-xl animate-pulse"></div>
-          <div className="relative inline-block p-4 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-full shadow-xl">
-            <Zap size={30} className="text-white" />
+          <div className="relative inline-block p-3 md:p-4 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-full shadow-xl">
+            <Zap size={24} className="text-white md:w-7 md:h-7" />
           </div>
         </div>
         
         {/* Animated headline */}
-        <div className="relative h-24 md:h-32 mb-8 w-full overflow-hidden">
+        <div className="relative min-h-[4rem] md:min-h-[5rem] mb-6 md:mb-8 w-full overflow-hidden">
           {textOptions.map((text, index) => (
             <h1 
               key={index}
-              className={`absolute inset-0 flex items-center justify-center text-5xl md:text-7xl font-extrabold transition-all duration-700 ease-in-out ${
+              className={`absolute w-full transition-all duration-500 ease-in-out transform ${
                 activeText === index 
-                  ? 'opacity-100 transform-none' 
-                  : 'opacity-0 translate-y-16'
+                  ? 'translate-y-0 opacity-100' 
+                  : index < activeText 
+                    ? '-translate-y-full opacity-0'
+                    : 'translate-y-full opacity-0'
               }`}
             >
-              <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-500">
+              <span className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-500">
                 {text}
               </span>
             </h1>
@@ -83,37 +84,37 @@ const Hero = () => {
         </div>
         
         {/* Subtitle */}
-        <p className={`text-xl md:text-2xl text-gray-700 max-w-2xl mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
+        <p className={`text-lg md:text-xl text-gray-700 max-w-2xl mb-8 md:mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
           Flip text, mirror images, and see your thoughts from a different angle. 
           <span className="text-purple-600 font-medium"> Discover new insights with NunoReverse.</span>
         </p>
         
-        {/* CTA buttons - Removed Learn More button */}
+        {/* CTA button */}
         <div className={`flex flex-col sm:flex-row gap-4 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
           <Button 
-            className="px-8 py-7 text-lg group relative overflow-hidden shadow-lg enhanced-gradient hover-lift"
+            className="px-6 md:px-8 py-6 md:py-7 text-base md:text-lg group relative overflow-hidden shadow-lg enhanced-gradient hover-lift"
             asChild
           >
             <Link to="/text-reverser" className="flex items-center">
               <span className="relative z-10">Try Text Reverser</span>
-              <ArrowRight size={18} className="ml-2 relative z-10 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={16} className="ml-2 relative z-10 group-hover:translate-x-1 transition-transform md:w-[18px] md:h-[18px]" />
               <div className="absolute top-0 left-0 w-20 h-full bg-white/20 transform -translate-x-full skew-x-12 group-hover:translate-x-[250%] transition-all duration-700"></div>
             </Link>
           </Button>
         </div>
         
         {/* Stats or trust indicators */}
-        <div className={`mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl w-full transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
+        <div className={`mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-3xl w-full transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
           {[
             { number: "10K+", label: "Texts Reversed" },
             { number: "4.9", label: "User Rating" },
             { number: "100%", label: "Creative Boost" }
           ].map((stat, i) => (
             <div key={i} className="text-center hover-lift">
-              <div className="font-bold text-3xl bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
+              <div className="font-bold text-2xl md:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
                 {stat.number}
               </div>
-              <div className="text-gray-600">{stat.label}</div>
+              <div className="text-sm md:text-base text-gray-600">{stat.label}</div>
             </div>
           ))}
         </div>
