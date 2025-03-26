@@ -6,10 +6,10 @@ const ThoughtReverserPage = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-gray-100">
       <Navbar />
-      <main className="flex-grow flex items-center justify-center px-4 sm:px-6 py-8 sm:py-12">
-        <div className="w-full max-w-3xl">
+      <main className="flex-1 container mx-auto px-4 sm:px-6 py-8 sm:py-12 mt-16">
+        <div className="w-full max-w-3xl mx-auto">
           <div className="p-[1px] bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400 rounded-2xl sm:rounded-3xl">
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-lg">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-lg border border-purple-100">
               <div className="p-4 sm:p-8 md:p-10">
                 <ThoughtReverser />
               </div>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { Copy, CheckCircle2, Sparkles, BrainCircuit, ArrowRight } from 'lucide-react';
+import { Copy, CheckCircle2, Sparkles, BrainCircuit, ArrowRight, HelpCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { analyzeThought } from '@/services/ai';
 import {
@@ -51,7 +51,7 @@ const ThoughtReverser = () => {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto bg-white rounded-xl">
+    <div className="w-full max-w-3xl mx-auto">
       <div className="flex items-center justify-between mb-6 px-4 sm:px-6">
         <div className="flex items-center">
           <BrainCircuit className="w-6 h-6 text-purple-600 mr-3" />
@@ -59,8 +59,8 @@ const ThoughtReverser = () => {
         </div>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button variant="ghost" size="icon" className="text-purple-400 hover:text-purple-600">
-              <BrainCircuit className="h-5 w-5" />
+            <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-600">
+              <HelpCircle className="h-5 w-5" />
             </Button>
           </TooltipTrigger>
           <TooltipContent className="max-w-[250px] text-sm">
@@ -76,7 +76,7 @@ const ThoughtReverser = () => {
         <div className="mt-2">
           <textarea
             id="input-thought"
-            className="w-full p-4 min-h-[120px] text-base sm:text-lg border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            className="w-full p-4 min-h-[120px] text-base sm:text-lg border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white"
             value={inputThought}
             onChange={(e) => setInputThought(e.target.value)}
             placeholder="Enter a thought, belief, or perspective you'd like to see differently..."
@@ -84,10 +84,10 @@ const ThoughtReverser = () => {
         </div>
       </div>
 
-      <div className="px-4 sm:px-6 pb-6">
+      <div className="flex flex-col items-center px-4 sm:px-6">
         <Button 
           onClick={analyzeAndTransform} 
-          className="w-full gradient-bg text-white hover:opacity-90 py-4 sm:py-6 text-lg sm:text-xl mb-2 rounded-xl relative overflow-hidden group"
+          className="w-full gradient-bg text-white hover:opacity-90 py-4 sm:py-6 text-lg sm:text-xl rounded-xl relative overflow-hidden group"
           disabled={!inputThought.trim() || isAnalyzing}
         >
           {isAnalyzing ? (
@@ -106,11 +106,11 @@ const ThoughtReverser = () => {
         <AnimatePresence mode="wait">
           {analysis && !isAnalyzing && (
             <motion.div 
-              className="mt-8 space-y-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
+              className="w-full mt-8 space-y-6"
+              initial={{ opacity: 0, height: 0, y: -20 }}
+              animate={{ opacity: 1, height: "auto", y: 0 }}
+              exit={{ opacity: 0, height: 0, y: -20 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
             >
               <Card className="border-green-100 bg-green-50/50">
                 <CardContent className="p-6">
@@ -132,7 +132,7 @@ const ThoughtReverser = () => {
                 </CardContent>
               </Card>
 
-              <div className="flex justify-center mt-8">
+              <div className="flex justify-center">
                 <Button 
                   variant="outline" 
                   size="lg"

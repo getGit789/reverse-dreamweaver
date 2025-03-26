@@ -60,8 +60,8 @@ Respond with a JSON object using this structure:
           content: `Transform this thought with a powerful, concise perspective: "${thought}"`
         }
       ],
-      temperature: 0.7,
-      max_tokens: 250,
+      temperature: 0.5,
+      max_tokens: 300,
       top_p: 0.9,
       frequency_penalty: 0.3,
       presence_penalty: 0.2,
