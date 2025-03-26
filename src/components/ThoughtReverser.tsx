@@ -1,11 +1,10 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { Lightbulb, Copy, CheckCircle2 } from 'lucide-react';
-import { toast } from 'sonner';
+import { Lightbulb, Copy, CheckCircle2, Sparkles } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Categories of cognitive distortions with their reversals
 const thoughtPatterns = {
@@ -132,21 +131,24 @@ const ThoughtReverser = () => {
   const [inputThought, setInputThought] = useState('');
   const [result, setResult] = useState<{ original: string; reversed: string } | null>(null);
   const [copied, setCopied] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const generateReversedThought = () => {
     if (inputThought.trim() === '') {
-      toast.error('Please enter a thought to reverse');
       return;
     }
     
-    const reversedThought = generateReversalFromPatterns(inputThought);
+    setIsGenerating(true);
     
-    setResult({
-      original: inputThought,
-      reversed: reversedThought,
-    });
-    
-    toast.success('Thought reversed successfully!');
+    // Simulate a brief "thinking" delay for better UX
+    setTimeout(() => {
+      const reversedThought = generateReversalFromPatterns(inputThought);
+      setResult({
+        original: inputThought,
+        reversed: reversedThought,
+      });
+      setIsGenerating(false);
+    }, 600);
   };
 
   const copyToClipboard = () => {
@@ -154,7 +156,6 @@ const ThoughtReverser = () => {
     
     navigator.clipboard.writeText(result.reversed);
     setCopied(true);
-    toast.success('Text copied to clipboard!');
     
     setTimeout(() => {
       setCopied(false);
@@ -180,45 +181,81 @@ const ThoughtReverser = () => {
 
       <Button 
         onClick={generateReversedThought} 
-        className="w-full gradient-bg text-white hover:opacity-90"
-        disabled={!inputThought.trim()}
+        className="w-full gradient-bg text-white hover:opacity-90 relative overflow-hidden"
+        disabled={!inputThought.trim() || isGenerating}
       >
-        Reverse My Thought
+        {isGenerating ? (
+          <div className="flex items-center justify-center">
+            <Sparkles className="h-4 w-4 mr-2 animate-pulse" />
+            <span>Generating new perspective...</span>
+          </div>
+        ) : (
+          <span>Reverse My Thought</span>
+        )}
       </Button>
 
-      {result && (
-        <div className="mt-8">
-          <Label className="mb-2 block">Your reversed perspective:</Label>
-          
-          <Card className="w-full shadow-md gradient-bg text-white mb-6">
-            <CardContent className="p-6">
-              <div>
-                <p className="text-lg font-medium">{result.reversed}</p>
-                <div className="flex items-center mt-4 text-sm text-white/80">
-                  <Lightbulb className="h-4 w-4 mr-2" /> 
-                  <p>Consider how this different view might be true</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Button 
-            variant="outline" 
-            className="w-full border-nuno-purple text-nuno-purple hover:bg-nuno-purple/10"
-            onClick={copyToClipboard}
+      <AnimatePresence mode="wait">
+        {result && !isGenerating && (
+          <motion.div 
+            className="mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            {copied ? (
-              <>
-                <CheckCircle2 className="mr-2 h-4 w-4" /> Copied to Clipboard
-              </>
-            ) : (
-              <>
-                <Copy className="mr-2 h-4 w-4" /> Copy Reversed Perspective
-              </>
-            )}
-          </Button>
-        </div>
-      )}
+            <Label className="mb-2 block">Your reversed perspective:</Label>
+            
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.4 }}
+            >
+              <Card className="w-full shadow-md gradient-bg text-white mb-6 overflow-hidden">
+                <CardContent className="p-6">
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4, duration: 0.3 }}
+                  >
+                    <p className="text-lg font-medium">{result.reversed}</p>
+                    <motion.div 
+                      className="flex items-center mt-4 text-sm text-white/80"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.6, duration: 0.3 }}
+                    >
+                      <Lightbulb className="h-4 w-4 mr-2" /> 
+                      <p>Consider how this different view might be true</p>
+                    </motion.div>
+                  </motion.div>
+                </CardContent>
+              </Card>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7, duration: 0.3 }}
+            >
+              <Button 
+                variant="outline" 
+                className="w-full border-nuno-purple text-nuno-purple hover:bg-nuno-purple/10"
+                onClick={copyToClipboard}
+              >
+                {copied ? (
+                  <>
+                    <CheckCircle2 className="mr-2 h-4 w-4" /> Copied to Clipboard
+                  </>
+                ) : (
+                  <>
+                    <Copy className="mr-2 h-4 w-4" /> Copy Reversed Perspective
+                  </>
+                )}
+              </Button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

@@ -1,11 +1,14 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { RefreshCw, Copy, CheckCircle2 } from 'lucide-react';
-import { toast } from 'sonner';
+import { RefreshCw, Copy, CheckCircle2, HelpCircle } from 'lucide-react';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const TextReverser = () => {
   const [inputText, setInputText] = useState('');
@@ -41,7 +44,6 @@ const TextReverser = () => {
   const copyToClipboard = () => {
     navigator.clipboard.writeText(outputText);
     setCopied(true);
-    toast.success('Text copied to clipboard!');
     
     setTimeout(() => {
       setCopied(false);
@@ -56,15 +58,30 @@ const TextReverser = () => {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-md">
-      <h2 className="text-2xl font-bold mb-6 text-gradient">Text Reverser</h2>
+    <div className="w-full max-w-3xl mx-auto bg-white rounded-xl">
+      <div className="flex items-center justify-between mb-4 sm:mb-6">
+        <h2 className="text-xl sm:text-2xl font-bold text-gradient">Text Reverser</h2>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-600">
+              <HelpCircle className="h-5 w-5" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent className="max-w-[200px] text-sm">
+            Choose how you want to reverse your text: by characters, words, sentences, or capitalization.
+          </TooltipContent>
+        </Tooltip>
+      </div>
       
-      <div className="mb-6">
-        <Label htmlFor="input-text">Enter your text:</Label>
+      <div className="mb-4 sm:mb-6">
+        <div className="flex items-center justify-between">
+          <Label htmlFor="input-text" className="text-sm sm:text-base">Enter your text:</Label>
+          <span className="text-xs text-gray-500">{inputText.length} characters</span>
+        </div>
         <div className="mt-2">
           <textarea
             id="input-text"
-            className="w-full p-3 min-h-[120px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-nuno-purple"
+            className="w-full p-3 min-h-[100px] sm:min-h-[120px] text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-nuno-purple"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             placeholder="Type or paste your text here..."
@@ -72,30 +89,50 @@ const TextReverser = () => {
         </div>
       </div>
 
-      <div className="mb-6">
-        <Label>Reverse type:</Label>
-        <Tabs value={reverseType} onValueChange={handleTabChange} className="mt-2">
-          <TabsList className="grid grid-cols-2 md:grid-cols-4">
-            <TabsTrigger value="characters">Characters</TabsTrigger>
-            <TabsTrigger value="words">Words</TabsTrigger>
-            <TabsTrigger value="sentences">Sentences</TabsTrigger>
-            <TabsTrigger value="capitalization">Capitalization</TabsTrigger>
+      <div className="mb-12 sm:mb-8">
+        <Label className="text-sm sm:text-base mb-3 block">Reverse type:</Label>
+        <Tabs value={reverseType} onValueChange={handleTabChange} className="w-full">
+          <TabsList className="w-full grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 bg-transparent">
+            <TabsTrigger 
+              value="characters" 
+              className="text-[13px] leading-none sm:text-sm py-2.5 h-auto sm:h-9 px-2 sm:px-3 whitespace-nowrap data-[state=active]:bg-nuno-purple data-[state=active]:text-white bg-muted hover:bg-muted/80"
+            >
+              Characters
+            </TabsTrigger>
+            <TabsTrigger 
+              value="words" 
+              className="text-[13px] leading-none sm:text-sm py-2.5 h-auto sm:h-9 px-2 sm:px-3 whitespace-nowrap data-[state=active]:bg-nuno-purple data-[state=active]:text-white bg-muted hover:bg-muted/80"
+            >
+              Words
+            </TabsTrigger>
+            <TabsTrigger 
+              value="sentences" 
+              className="text-[13px] leading-none sm:text-sm py-2.5 h-auto sm:h-9 px-2 sm:px-3 whitespace-nowrap data-[state=active]:bg-nuno-purple data-[state=active]:text-white bg-muted hover:bg-muted/80"
+            >
+              Sentences
+            </TabsTrigger>
+            <TabsTrigger 
+              value="capitalization" 
+              className="text-[13px] leading-none sm:text-sm py-2.5 h-auto sm:h-9 px-2 sm:px-3 whitespace-nowrap data-[state=active]:bg-nuno-purple data-[state=active]:text-white bg-muted hover:bg-muted/80"
+            >
+              Caps
+            </TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
 
       <Button 
         onClick={reverseText} 
-        className="w-full gradient-bg text-white hover:opacity-90"
+        className="w-full gradient-bg text-white hover:opacity-90 py-3 sm:py-6 text-sm sm:text-lg mb-2"
         disabled={!inputText}
       >
         <RefreshCw className="mr-2 h-4 w-4" /> Reverse Text
       </Button>
 
       {outputText && (
-        <div className="mt-8">
+        <div className="mt-6 sm:mt-8">
           <div className="flex justify-between items-center mb-2">
-            <Label htmlFor="output-text">Result:</Label>
+            <Label htmlFor="output-text" className="text-sm sm:text-base">Result:</Label>
             <Button 
               variant="ghost" 
               size="sm" 
@@ -104,18 +141,20 @@ const TextReverser = () => {
             >
               {copied ? (
                 <>
-                  <CheckCircle2 className="mr-1 h-4 w-4" /> Copied
+                  <CheckCircle2 className="mr-1 h-4 w-4" /> 
+                  <span className="hidden sm:inline">Copied</span>
                 </>
               ) : (
                 <>
-                  <Copy className="mr-1 h-4 w-4" /> Copy
+                  <Copy className="mr-1 h-4 w-4" /> 
+                  <span className="hidden sm:inline">Copy</span>
                 </>
               )}
             </Button>
           </div>
           <div 
             id="output-text"
-            className="p-4 bg-gray-50 border border-gray-200 rounded-md min-h-[80px] break-words"
+            className="p-3 sm:p-4 bg-gray-50 border border-gray-200 rounded-md min-h-[60px] sm:min-h-[80px] break-words text-sm sm:text-base"
           >
             {outputText}
           </div>
