@@ -8,19 +8,12 @@ export default defineConfig(({ mode }) => {
   
   return {
     server: {
-      host: "::",
-      port: 8080,
+      port: 3000,
       proxy: {
-        '/api/chat/completions': {
-          target: 'https://api.openai.com/v1',
+        '/api/analyze-thought': {
+          target: 'http://localhost:8888/.netlify/functions',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
-          configure: (proxy, options) => {
-            proxy.on('proxyReq', (proxyReq, req, res) => {
-              proxyReq.setHeader('Authorization', `Bearer ${env.VITE_OPENAI_API_KEY}`);
-              proxyReq.setHeader('Content-Type', 'application/json');
-            });
-          },
         },
       },
     },

@@ -8,12 +8,8 @@ export async function analyzeThought(thought: string): Promise<ThoughtAnalysis> 
   try {
     console.log('Making API request...');
     
-    // Use different endpoints for development and production
-    const endpoint = import.meta.env.DEV 
-      ? '/api/chat/completions'  // Development (Vite proxy)
-      : '/api/analyze-thought';  // Production (Netlify function)
-
-    const response = await fetch(endpoint, {
+    // Use Netlify function endpoint in both environments
+    const response = await fetch('/api/analyze-thought', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

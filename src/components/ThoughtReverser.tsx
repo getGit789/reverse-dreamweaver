@@ -84,7 +84,7 @@ const ThoughtReverser = () => {
         </div>
       </div>
 
-      <div className="px-4 sm:px-6">
+      <div className="px-4 sm:px-6 pb-6">
         <Button 
           onClick={analyzeAndTransform} 
           className="w-full gradient-bg text-white hover:opacity-90 py-4 sm:py-6 text-lg sm:text-xl mb-2 rounded-xl relative overflow-hidden group"
@@ -132,7 +132,7 @@ const ThoughtReverser = () => {
                 </CardContent>
               </Card>
 
-              <div className="flex justify-end">
+              <div className="flex justify-center mt-8">
                 <Button 
                   variant="outline" 
                   size="lg"
