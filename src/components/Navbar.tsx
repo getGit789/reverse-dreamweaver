@@ -58,13 +58,26 @@ const Navbar = () => {
               <div className="h-9 w-9 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 flex items-center justify-center text-white font-bold text-lg">
                 N
               </div>
-              <h1 className={`hidden md:block text-2xl font-bold transition-colors duration-300 ${
-                isScrolled ? 'text-gray-800' : 'text-gradient bg-gradient-to-r from-purple-600 to-indigo-600'
-              }`}>
-                NunoReverse
-              </h1>
+              {/* Desktop: NunoReverse text + Beta */}
+              <div className="hidden md:flex items-center">
+                <h1 className={`text-2xl font-bold transition-colors duration-300 ${
+                  isScrolled ? 'text-gray-800' : 'text-gradient bg-gradient-to-r from-purple-600 to-indigo-600'
+                }`}>
+                  NunoReverse
+                  <span className="inline-flex items-center justify-center ml-2 px-2 py-0.5 text-xs font-semibold rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-sm">
+                    BETA
+                  </span>
+                </h1>
+              </div>
             </div>
           </Link>
+
+          {/* Mobile: Centered Beta Label */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 md:hidden">
+            <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-semibold rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-sm">
+              BETA
+            </span>
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center justify-center flex-1 relative z-[101]">
@@ -94,7 +107,7 @@ const Navbar = () => {
           {/* Spacer div to balance the logo */}
           <div className="hidden md:block min-w-[200px]"></div>
 
-          {/* Mobile Menu Button - Always visible */}
+          {/* Mobile Menu Button */}
           <button 
             className="md:hidden text-gray-700 relative z-[101] p-2 hover:bg-gray-100 rounded-full" 
             onClick={toggleMenu}
@@ -104,7 +117,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu - Compact dropdown instead of full screen */}
+        {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg rounded-b-xl z-[99] max-h-[80vh] overflow-y-auto">
             <nav className="flex flex-col space-y-4 p-6">
@@ -137,7 +150,6 @@ const Navbar = () => {
                 </SignedOut>
                 <SignedIn>
                   <div className="flex items-center">
-                    {/* Place the UserButton in a normal visible position, but don't make it fill the container */}
                     <div className="relative">
                       <UserButton 
                         afterSignOutUrl="/" 
@@ -149,8 +161,6 @@ const Navbar = () => {
                         }}
                       />
                     </div>
-                    
-                    {/* Create a button overlay that opens the user profile */}
                     <button 
                       onClick={handleAccountClick}
                       className="flex items-center space-x-3 flex-1 hover:bg-gray-50 p-2 rounded-md transition-colors w-full text-left ml-3"
