@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles, BrainCircuit } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 const FloatingBubble = ({ delay, duration, size, left, top }: { delay: number; duration: number; size: number; left: number; top: number }) => (
   <div
@@ -36,9 +36,9 @@ const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeText, setActiveText] = useState(0);
   const textOptions = [
-    "Reverse Your\nPerspective",
-    "Transform Your Vision",
-    "Reimagine Everything"
+    "Transform Your\nThoughts",
+    "Gain New\nPerspectives",
+    "Challenge Your\nAssumptions"
   ];
 
   useEffect(() => {
@@ -50,9 +50,9 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="w-full min-h-screen flex flex-col justify-center pt-16 sm:pt-20 lg:pt-24 pb-8 lg:pb-16 px-4 lg:px-6 relative overflow-hidden">
-      {/* Optimized gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white via-purple-50/80 to-indigo-50/80 -z-10" />
+    <section className="w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 relative overflow-hidden">
+      {/* Enhanced gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white via-purple-50/90 to-pink-50/90 -z-10" />
       
       {/* Simplified decorative elements */}
       <div className="absolute inset-0 -z-10">
@@ -95,15 +95,20 @@ const Hero = () => {
         ))}
       </div>
       
-      <div className="flex-1 max-w-7xl mx-auto flex flex-col items-center justify-center text-center relative z-10">
-        {/* Main content wrapper - Improved mobile spacing */}
-        <div className="flex flex-col items-center justify-center w-full">
+      <div className="flex-1 max-w-7xl mx-auto flex flex-col items-center justify-center text-center relative z-10 py-16 sm:py-20">
+        <div className="flex flex-col items-center justify-center w-full max-w-4xl mx-auto px-4">
+          {/* AI Badge */}
+          <div className="mb-6 sm:mb-8 inline-flex items-center px-4 py-2 rounded-full bg-purple-100/80 backdrop-blur-sm border border-purple-200/50">
+            <BrainCircuit className="w-4 sm:w-5 h-4 sm:h-5 text-purple-600 mr-2" />
+            <span className="text-sm font-medium text-purple-700">AI-Powered Thought Transformation</span>
+          </div>
+
           {/* Mobile animated headline */}
-          <div className="relative min-h-[7rem] mb-6 w-full overflow-hidden lg:hidden">
+          <div className="relative min-h-[6rem] sm:min-h-[7rem] mb-4 sm:mb-6 w-full overflow-hidden lg:hidden">
             {textOptions.map((text, index) => (
               <h1 
                 key={index}
-                className={`absolute w-full transition-all duration-500 ease-in-out transform px-4 ${
+                className={`absolute w-full transition-all duration-500 ease-in-out transform ${
                   activeText === index 
                     ? 'translate-y-0 opacity-100' 
                     : index < activeText 
@@ -111,7 +116,7 @@ const Hero = () => {
                       : 'translate-y-full opacity-0'
                 }`}
               >
-                <span className="text-4xl sm:text-5xl font-extrabold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-500 leading-[1.15] whitespace-pre-line">
+                <span className="text-3xl sm:text-4xl font-extrabold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-500 leading-tight sm:leading-[1.15] whitespace-pre-line">
                   {text}
                 </span>
               </h1>
@@ -123,7 +128,7 @@ const Hero = () => {
             {textOptions.map((text, index) => (
               <h1 
                 key={index}
-                className={`absolute w-full transition-all duration-500 ease-in-out transform px-4 ${
+                className={`absolute w-full transition-all duration-500 ease-in-out transform ${
                   activeText === index 
                     ? 'translate-y-0 opacity-100' 
                     : index < activeText 
@@ -131,52 +136,62 @@ const Hero = () => {
                       : 'translate-y-full opacity-0'
                 }`}
               >
-                <span className="text-7xl font-extrabold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-500 leading-[1.2] whitespace-pre-line">
+                <span className="text-7xl font-extrabold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-500 leading-[1.2] whitespace-pre-line">
                   {text}
                 </span>
               </h1>
             ))}
           </div>
           
-          {/* Optimized subtitle */}
-          <p className={`text-xl sm:text-2xl text-gray-700 max-w-2xl mb-10 sm:mb-12 transition-all duration-700 px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
-            Flip text, mirror images, and see your thoughts from a different angle. 
-            <span className="text-purple-600 font-medium"> Discover new insights with NunoReverse.</span>
+          {/* Enhanced subtitle */}
+          <p className={`text-lg sm:text-xl text-gray-700 max-w-2xl mb-8 sm:mb-10 transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
+            Experience the power of AI-driven perspective transformation. 
+            <span className="text-purple-600 font-medium"> Break free from limiting thoughts and discover new insights.</span>
           </p>
-        </div>
 
-        {/* Optimized bottom section with CTA */}
-        <div className="w-full flex flex-col items-center space-y-8 sm:space-y-12">
-          {/* Improved CTA positioning */}
-          <div className={`flex flex-col items-center sm:flex-row gap-4 transition-all duration-700 delay-200 w-full sm:w-auto px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
-            <Button 
-              className="px-8 py-6 lg:py-7 text-lg sm:text-xl group relative overflow-hidden shadow-lg enhanced-gradient hover-lift w-full sm:w-auto"
-              asChild
-            >
-              <Link to="/text-reverser" className="flex items-center justify-center">
-                <span className="relative z-10">Try Text Reverser</span>
-                <ArrowRight size={20} className="ml-2 relative z-10 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
-          </div>
-          
-          {/* Optimized stats grid */}
-          <div className={`grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 max-w-3xl w-full transition-all duration-700 delay-300 px-4 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
+          {/* Feature highlights */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 w-full max-w-4xl mb-8 sm:mb-12">
             {[
-              { number: "10K+", label: "Texts Reversed" },
-              { number: "4.9", label: "User Rating" },
-              { number: "100%", label: "Creative Boost", className: "col-span-2 sm:col-span-1 max-w-[12rem] sm:max-w-none mx-auto" }
-            ].map((stat, i) => (
-              <div 
-                key={i} 
-                className={`text-center hover-lift bg-white/50 backdrop-blur-sm rounded-xl p-5 sm:p-6 ${stat.className || ''}`}
-              >
-                <div className="font-bold text-2xl sm:text-3xl lg:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
-                  {stat.number}
+              {
+                icon: <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-purple-500" />,
+                title: "AI-Powered Analysis",
+                description: "Advanced AI identifies thought patterns and suggests transformative perspectives"
+              },
+              {
+                icon: <BrainCircuit className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-500" />,
+                title: "Deep Insights",
+                description: "Get profound, contextual reversals that challenge your assumptions"
+              },
+              {
+                icon: <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-pink-500" />,
+                title: "Instant Transformation",
+                description: "Transform your thoughts in seconds with our intelligent system"
+              }
+            ].map((feature, i) => (
+              <div key={i} className="bg-white/50 backdrop-blur-sm rounded-xl p-4 sm:p-6 hover-lift">
+                <div className="bg-white/80 rounded-lg w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center mb-3 sm:mb-4 mx-auto">
+                  {feature.icon}
                 </div>
-                <div className="text-base sm:text-lg text-gray-600 mt-1">{stat.label}</div>
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                <p className="text-sm text-gray-600">{feature.description}</p>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Enhanced CTA */}
+        <div className="w-full flex flex-col items-center">
+          <div className={`flex flex-col sm:flex-row items-center gap-4 transition-all duration-700 delay-200 w-full sm:w-auto ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
+            <Button 
+              className="w-full sm:w-auto px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg group relative overflow-hidden shadow-lg enhanced-gradient hover-lift"
+              asChild
+            >
+              <Link to="/thought-reverser" className="flex items-center justify-center">
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2 relative z-10" />
+                <span className="relative z-10">Transform Your Thoughts</span>
+                <ArrowRight size={18} className="ml-2 relative z-10 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
           </div>
         </div>
       </div>
