@@ -1,4 +1,3 @@
-
 import { ArrowRight, FileText, Image, MessageSquare, RotateCw } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -76,18 +75,18 @@ const Features = () => {
       color: "from-purple-600 to-blue-500"
     },
     {
-      icon: <Image className="h-10 w-10 text-white" />,
-      title: "Image Reverser",
-      description: "Mirror your images horizontally or vertically. Create symmetric and reversed versions.",
-      link: "/image-reverser",
-      color: "from-blue-500 to-teal-400"
-    },
-    {
       icon: <MessageSquare className="h-10 w-10 text-white" />,
       title: "Thought Reverser",
       description: "Challenge your thinking by seeing concepts from opposite perspectives.",
       link: "/thought-reverser",
       color: "from-purple-500 to-pink-400"
+    },
+    {
+      icon: <Image className="h-10 w-10 text-white" />,
+      title: "Image Reverser",
+      description: "Mirror your images horizontally or vertically. Create symmetric and reversed versions.",
+      link: "/image-reverser",
+      color: "from-blue-500 to-teal-400"
     }
   ];
 
