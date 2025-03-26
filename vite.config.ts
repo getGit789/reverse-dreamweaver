@@ -8,7 +8,8 @@ export default defineConfig(({ mode }) => {
   
   return {
     server: {
-      port: 3000,
+      host: "::",
+      port: 8080,
       proxy: {
         '/api/analyze-thought': {
           target: 'http://localhost:8888/.netlify/functions',
