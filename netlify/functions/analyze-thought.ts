@@ -46,7 +46,14 @@ Guidelines for responses:
 3. Brief Explanation (User-Facing):
 - One clear, practical benefit (20-25 words max)
 - Connect to real-life impact
-- Keep it actionable`
+- Keep it actionable
+
+Respond with a JSON object using this structure:
+{
+  "pattern": "(Internal) Core limiting belief identified",
+  "reversal": "Powerful 15-20 word perspective shift using metaphor or clear imagery",
+  "explanation": "Single, practical benefit in 20-25 words"
+}`
         },
         {
           role: "user",
@@ -61,12 +68,26 @@ Guidelines for responses:
       response_format: { type: "json_object" }
     });
 
+    const aiResponse = JSON.parse(response.choices[0].message?.content || '{}');
+    
+    // Transform response to match expected format if needed
+    const transformedResponse = {
+      pattern: aiResponse.pattern || aiResponse.Pattern_Recognition,
+      reversal: aiResponse.reversal || aiResponse.Alternative_Perspective,
+      explanation: aiResponse.explanation || aiResponse.Brief_Explanation
+    };
+
+    // Validate the response has required fields
+    if (!transformedResponse.reversal || !transformedResponse.explanation) {
+      throw new Error('Invalid response format from AI');
+    }
+
     return {
       statusCode: 200,
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(JSON.parse(response.choices[0].message?.content || '{}')),
+      body: JSON.stringify(transformedResponse),
     };
   } catch (error) {
     console.error('Error:', error);
