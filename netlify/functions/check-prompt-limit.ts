@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { Handler } from '@netlify/functions';
 import { PrismaClient } from '@prisma/client';
 
@@ -13,7 +14,6 @@ async function getPrismaClient(): Promise<PrismaClient> {
         },
       },
     });
-    
     try {
       // Test connection
       await prismaInstance.$queryRaw`SELECT 1`;
