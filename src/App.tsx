@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import TextReverserPage from "./pages/TextReverserPage";
 import ImageReverserPage from "./pages/ImageReverserPage";
 import ThoughtReverserPage from "./pages/ThoughtReverserPage";
+import AdminPage from "./pages/AdminPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -72,6 +73,19 @@ const App = () => (
               <>
                 <SignedIn>
                   <ThoughtReverserPage />
+                </SignedIn>
+                <SignedOut>
+                  <RedirectToSignIn />
+                </SignedOut>
+              </>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <>
+                <SignedIn>
+                  <AdminPage />
                 </SignedIn>
                 <SignedOut>
                   <RedirectToSignIn />

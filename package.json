@@ -9,13 +9,18 @@
     "build": "tsc && vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "prisma generate",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.25.2",
     "@clerk/themes": "^2.2.24",
     "@hookform/resolvers": "^3.9.0",
     "@netlify/functions": "^3.0.4",
+    "@prisma/client": "^6.5.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-aspect-ratio": "^1.1.0",
@@ -55,8 +60,10 @@
     "framer-motion": "^12.6.0",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.462.0",
+    "next": "^15.2.4",
     "next-themes": "^0.3.0",
-    "openai": "^4.89.0",
+    "openai": "^4.90.0",
+    "prisma": "^6.5.0",
     "react": "^18.3.1",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.3.1",
@@ -73,6 +80,9 @@
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@tailwindcss/typography": "^0.5.15",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/node": "^22.5.5",
@@ -85,11 +95,13 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+    "happy-dom": "^17.4.4",
     "netlify-cli": "^19.0.3",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "vitest": "^3.0.9"
   }
 }

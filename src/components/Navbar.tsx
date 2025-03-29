@@ -85,22 +85,27 @@ const Navbar = () => {
               { path: '/', label: 'Home' },
               { path: '/thought-reverser', label: 'Thought Reverser' },
               { path: '/image-reverser', label: 'Image Reverser' },
-              { path: '/text-reverser', label: 'Text Reverser' }
+              { path: '/text-reverser', label: 'Text Reverser' },
+              { path: '/admin', label: 'Admin', requiresAuth: true }
             ].map((item) => (
-              <Link 
-                key={item.path}
-                to={item.path} 
-                className={`font-medium transition-colors duration-200 relative px-4 ${
-                  isActive(item.path) 
-                    ? 'text-purple-600' 
-                    : 'text-gray-700 hover:text-purple-600'
-                }`}
-              >
-                {item.label}
-                {isActive(item.path) && (
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-purple-600 rounded-full"></span>
+              <SignedIn key={item.path + '-auth-check'}>
+                {(!item.requiresAuth || (item.requiresAuth)) && (
+                  <Link 
+                    key={item.path}
+                    to={item.path} 
+                    className={`font-medium transition-colors duration-200 relative px-4 ${
+                      isActive(item.path) 
+                        ? 'text-purple-600' 
+                        : 'text-gray-700 hover:text-purple-600'
+                    }`}
+                  >
+                    {item.label}
+                    {isActive(item.path) && (
+                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-purple-600 rounded-full"></span>
+                    )}
+                  </Link>
                 )}
-              </Link>
+              </SignedIn>
             ))}
           </nav>
 
@@ -125,20 +130,25 @@ const Navbar = () => {
                 { path: '/', label: 'Home' },
                 { path: '/thought-reverser', label: 'Thought Reverser' },
                 { path: '/image-reverser', label: 'Image Reverser' },
-                { path: '/text-reverser', label: 'Text Reverser' }
+                { path: '/text-reverser', label: 'Text Reverser' },
+                { path: '/admin', label: 'Admin', requiresAuth: true }
               ].map((item) => (
-                <Link 
-                  key={item.path}
-                  to={item.path} 
-                  className={`text-lg font-medium ${
-                    isActive(item.path) 
-                      ? 'text-purple-600' 
-                      : 'text-gray-700 hover:text-purple-600'
-                  }`}
-                  onClick={toggleMenu}
-                >
-                  {item.label}
-                </Link>
+                <SignedIn key={item.path + '-mobile-auth-check'}>
+                  {(!item.requiresAuth || (item.requiresAuth)) && (
+                    <Link 
+                      key={item.path}
+                      to={item.path} 
+                      className={`text-lg font-medium ${
+                        isActive(item.path) 
+                          ? 'text-purple-600' 
+                          : 'text-gray-700 hover:text-purple-600'
+                      }`}
+                      onClick={toggleMenu}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </SignedIn>
               ))}
               <div className="pt-4 border-t border-gray-200">
                 <SignedOut>
