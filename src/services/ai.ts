@@ -24,11 +24,24 @@ export async function analyzeThought(thought: string): Promise<ThoughtAnalysis> 
         statusText: response.statusText,
         error: errorData
       });
+      
+      // Check if there's a fallback response available
+      if (errorData.fallback) {
+        console.log('Using fallback response:', errorData.fallback);
+        return errorData.fallback;
+      }
+      
       throw new Error(errorData.error?.message || 'Failed to analyze thought');
     }
 
     const data = await response.json();
     console.log('API Response Data:', data);
+    
+    // If the API returned an error but with a fallback, use the fallback
+    if (data.error && data.fallback) {
+      console.log('API returned error with fallback:', data);
+      return data.fallback;
+    }
     
     if (!data.reversal || !data.explanation) {
       console.error('Invalid API response format:', data);
@@ -37,7 +50,8 @@ export async function analyzeThought(thought: string): Promise<ThoughtAnalysis> 
 
     return {
       reversal: data.reversal,
-      explanation: data.explanation
+      explanation: data.explanation,
+      pattern: data.pattern
     } as ThoughtAnalysis;
   } catch (error) {
     console.error('Error analyzing thought:', error);
