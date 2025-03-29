@@ -6,77 +6,29 @@ let prismaInstance: PrismaClient | null = null;
 
 async function getPrismaClient(): Promise<PrismaClient> {
   if (!prismaInstance) {
-    console.log('Creating new Prisma client instance');
+    prismaInstance = new PrismaClient({
+      datasources: {
+        db: {
+          url: process.env.DATABASE_URL,
+        },
+      },
+    });
     
-    // Define potential database URLs to try
-    const dbUrls = [
-      'file:./prisma/dev.db',
-      'file:../../../prisma/dev.db',
-      'file:../../prisma/dev.db'
-    ];
-    
-    let error = null;
-    
-    // Try each URL until one works
-    for (const dbUrl of dbUrls) {
-      try {
-        console.log(`Trying database URL: ${dbUrl}`);
-        
-        prismaInstance = new PrismaClient({
-          datasources: {
-            db: { url: dbUrl }
-          }
-        });
-        
-        await prismaInstance.$connect();
-        
-        // Verify the table exists by running a simple query
-        const tables = await prismaInstance.$queryRaw`
-          SELECT name FROM sqlite_master WHERE type='table' AND name='UserPrompt';
-        `;
-        console.log('Tables query result:', tables);
-        
-        // If the UserPrompt table doesn't exist, create it
-        if (Array.isArray(tables) && tables.length === 0) {
-          console.log('UserPrompt table does not exist, creating it');
-          
-          // Create the UserPrompt table directly with SQL
-          await prismaInstance.$executeRaw`
-            CREATE TABLE IF NOT EXISTS "UserPrompt" (
-              "id" TEXT NOT NULL PRIMARY KEY,
-              "userId" TEXT NOT NULL UNIQUE,
-              "promptCount" INTEGER NOT NULL DEFAULT 0,
-              "lastResetDate" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-              "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-              "updatedAt" DATETIME NOT NULL
-            );
-            
-            CREATE UNIQUE INDEX IF NOT EXISTS "UserPrompt_userId_key" ON "UserPrompt"("userId");
-            CREATE INDEX IF NOT EXISTS "UserPrompt_userId_idx" ON "UserPrompt"("userId");
-            CREATE INDEX IF NOT EXISTS "UserPrompt_lastResetDate_idx" ON "UserPrompt"("lastResetDate");
-          `;
-          console.log('Successfully created UserPrompt table');
-        }
-        
-        // If we get here, connection worked
-        console.log(`Successfully connected to database at: ${dbUrl}`);
-        return prismaInstance;
-        
-      } catch (err) {
-        console.error(`Failed to connect using ${dbUrl}:`, err);
-        error = err;
-        
-        // Clean up before trying next URL
-        if (prismaInstance) {
-          await prismaInstance.$disconnect();
-          prismaInstance = null;
-        }
+    try {
+      // Test connection
+      await prismaInstance.$queryRaw`SELECT 1`;
+      console.log('Successfully connected to PostgreSQL database');
+      return prismaInstance;
+    } catch (error) {
+      console.error('Error connecting to database:', error);
+      
+      if (prismaInstance) {
+        await prismaInstance.$disconnect();
+        prismaInstance = null;
       }
+      
+      throw error;
     }
-    
-    // If we get here, all URLs failed
-    console.error('Failed to connect to database with all URLs');
-    throw error || new Error('Failed to connect to database');
   }
   
   return prismaInstance;
