@@ -5,7 +5,7 @@ import { Label } from '@/components/ui/label';
 import { Copy, CheckCircle2, Sparkles, BrainCircuit, ArrowRight, HelpCircle, AlertCircle, RefreshCw, Clock, ThumbsUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { analyzeThought, ThoughtAnalysis } from '@/services/ai';
-import { checkPromptLimit, incrementPromptUsage } from '@/services/api';
+import { checkPromptLimit, incrementPromptUsage, saveFeedback } from '@/services/api';
 import { useUser } from '@clerk/clerk-react';
 import {
   Tooltip,
@@ -80,17 +80,26 @@ const ThoughtReverser = () => {
     return format(tomorrow, 'h:mm a');
   };
 
-  const submitFeedback = () => {
-    // In a real app, you would send this feedback to your backend
-    console.log("User feedback:", feedback);
-    setFeedback('');
-    setShowLimitDialog(false);
+  const submitFeedback = async () => {
+    if (!feedback.trim() || !user) return;
     
-    // Show a thank you toast
-    toast("Thank you for your feedback!", {
-      description: "We appreciate your input and will use it to improve our service.",
-      duration: 5000,
-    });
+    try {
+      await saveFeedback(user.id, feedback);
+      setFeedback('');
+      setShowLimitDialog(false);
+      
+      // Show a thank you toast
+      toast.success("Thank you for your feedback!", {
+        description: "We appreciate your input and will use it to improve our service.",
+        duration: 5000,
+      });
+    } catch (error) {
+      console.error('Failed to save feedback:', error);
+      toast.error("Couldn't save your feedback", {
+        description: "Please try again later.",
+        duration: 5000,
+      });
+    }
   };
   
   const analyzeAndTransform = async () => {
@@ -125,16 +134,28 @@ const ThoughtReverser = () => {
         }
       }
 
+      // Get the analysis result first
       const result = await analyzeThought(inputThought);
-      setAnalysis(result);
       
-      // Increment usage count after successful analysis
+      // Try to increment the usage count
       if (user) {
-        await incrementPromptUsage(user.id);
-        // Update the limit info
-        const updatedLimitInfo = await checkPromptLimit(user.id);
-        setPromptLimit(updatedLimitInfo);
+        try {
+          await incrementPromptUsage(user.id);
+          // Only update the prompt limit info if increment was successful
+          const updatedLimitInfo = await checkPromptLimit(user.id);
+          setPromptLimit(updatedLimitInfo);
+        } catch (incrementError) {
+          console.error('Failed to increment prompt usage:', incrementError);
+          // Show a warning toast but don't block the analysis
+          toast.warning("Failed to update prompt count", {
+            description: "Your analysis is ready, but we couldn't update your prompt count. Please refresh the page.",
+            duration: 5000,
+          });
+        }
       }
+      
+      // Set the analysis result
+      setAnalysis(result);
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to analyze thought.');
     } finally {
@@ -177,9 +198,9 @@ const ThoughtReverser = () => {
           <div className="flex items-center gap-2 text-sm text-gray-500">
             <div className="flex items-center">
               <Sparkles className="h-4 w-4 mr-1 text-purple-500" />
-              <span>Daily prompts remaining: </span>
+              <span>Daily prompts used: </span>
               <span className={`ml-1 font-medium ${promptLimit.remainingPrompts === 0 ? 'text-red-500' : 'text-purple-600'}`}>
-                {promptLimit.remainingPrompts} of 3
+                {promptLimit.totalUsed} of 3
               </span>
             </div>
           </div>

@@ -70,6 +70,10 @@ export async function incrementPromptUsage(userId: string): Promise<void> {
       body: JSON.stringify({ userId, action: 'increment' }),
     });
 
+    if (!response.ok) {
+      throw new Error('Failed to increment prompt usage');
+    }
+
     // Handle non-JSON responses
     let data;
     const contentType = response.headers.get('content-type');
@@ -78,22 +82,44 @@ export async function incrementPromptUsage(userId: string): Promise<void> {
         data = await response.json();
       } catch (parseError) {
         console.error('Error parsing JSON response:', parseError);
-        return; // Silently continue
+        throw new Error('Failed to parse increment response');
       }
     } else {
       const textData = await response.text();
       console.error('Received non-JSON response:', textData);
-      return; // Silently continue
+      throw new Error('Invalid response format');
     }
     
     console.log('Increment response:', data);
 
-    if (!response.ok) {
-      console.warn('Failed to increment prompt usage:', data.details || data.error);
-      // Continue silently instead of throwing
+    if (!data.success) {
+      throw new Error('Failed to increment prompt usage');
     }
   } catch (error) {
     console.error('Error incrementing prompt usage:', error);
-    // Continue silently instead of throwing
+    throw error; // Re-throw the error to be handled by the caller
+  }
+}
+
+export async function saveFeedback(userId: string, feedback: string): Promise<void> {
+  try {
+    console.log('Saving feedback for user:', userId);
+    const response = await fetch('/api/save-feedback', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, feedback }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to save feedback');
+    }
+
+    const data = await response.json();
+    console.log('Feedback saved:', data);
+  } catch (error) {
+    console.error('Error saving feedback:', error);
+    throw error;
   }
 } 
