@@ -152,7 +152,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Your Name - [@LinkedIn](https://www.linkedin.com/in/damir-kranjcevic-613825200/)
 
-Project Link: [https://github.com/yourusername/nunoreverse](https://github.com/yourusername/nunoreverse)
+Project Link: [https://github.com/GetGit789/nunoreverse](https://getGit789/yourusername/nunoreverse)
 
 ---
 
