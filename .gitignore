@@ -26,4 +26,21 @@ dist-ssr
 
 # Local Netlify folder
 .netlify
+
+# Planning and sensitive files
 plan.md
+Promotion.md
+*-plan.md
+*-notes.md
+TODO.md
+SECRETS.md
+planning/
+notes/
+docs/internal/
+
+# Environment files
+.env*
+.env.local
+.env.development
+.env.test
+.env.production
