@@ -12,24 +12,24 @@ const tools = [
     color: 'bg-blue-500'
   },
   {
-    title: 'Image Reverser',
-    description: 'Flip and transform images with ease',
-    icon: Image,
-    path: '/image-reverser',
-    color: 'bg-purple-500'
-  },
-  {
     title: 'Thought Reverser',
     description: 'Gain new perspectives on your thoughts',
     icon: Brain,
     path: '/thought-reverser',
     color: 'bg-green-500'
+  },
+  {
+    title: 'Image Reverser',
+    description: 'Flip and transform images with ease',
+    icon: Image,
+    path: '/image-reverser',
+    color: 'bg-purple-500'
   }
 ];
 
 const ToolSelection = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pt-24 px-4 pb-12">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
