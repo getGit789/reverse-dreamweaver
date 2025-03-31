@@ -19,8 +19,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       afterSignInUrl="/tools"
       afterSignUpUrl="/tools"
       afterSignOutUrl="/"
-      routerPush={(to) => window.location.assign(to)}
-      routerReplace={(to) => window.location.replace(to)}
       appearance={{
         baseTheme: dark,
         elements: {
@@ -38,6 +36,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           identityPreviewText: "text-zinc-300",
           identityPreviewEditButton: 
             "text-purple-400 hover:text-purple-300",
+          rootBox: "w-full"
         },
         layout: {
           socialButtonsPlacement: "bottom",
