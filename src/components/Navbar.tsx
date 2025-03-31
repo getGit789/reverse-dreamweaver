@@ -91,26 +91,23 @@ const Navbar = () => {
               { path: '/tools', label: 'Tools' },
               { path: '/thought-reverser', label: 'Thought Reverser' },
               { path: '/image-reverser', label: 'Image Reverser' },
-              { path: '/text-reverser', label: 'Text Reverser' },
-              { path: '/admin', label: 'Admin', requiresAuth: true }
+              { path: '/text-reverser', label: 'Text Reverser' }
             ].map((item) => (
               <SignedIn key={item.path + '-auth-check'}>
-                {(!item.requiresAuth || (item.requiresAuth)) && (
-                  <Link 
-                    key={item.path}
-                    to={item.path} 
-                    className={`font-medium transition-colors duration-200 relative px-4 ${
-                      isActive(item.path) 
-                        ? 'text-purple-600' 
-                        : 'text-gray-700 hover:text-purple-600'
-                    }`}
-                  >
-                    {item.label}
-                    {isActive(item.path) && (
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-purple-600 rounded-full"></span>
-                    )}
-                  </Link>
-                )}
+                <Link 
+                  key={item.path}
+                  to={item.path} 
+                  className={`font-medium transition-colors duration-200 relative px-4 ${
+                    isActive(item.path) 
+                      ? 'text-purple-600' 
+                      : 'text-gray-700 hover:text-purple-600'
+                  }`}
+                >
+                  {item.label}
+                  {isActive(item.path) && (
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-purple-600 rounded-full"></span>
+                  )}
+                </Link>
               </SignedIn>
             ))}
           </nav>
@@ -119,7 +116,10 @@ const Navbar = () => {
           <div className="hidden md:flex items-center min-w-[200px] justify-end">
             <SignedOut>
               <SignInButton mode="modal">
-                <button className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-md transition-colors">
+                <button 
+                  className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                  onClick={handleSignInClick}
+                >
                   Sign In
                 </button>
               </SignInButton>
@@ -156,24 +156,21 @@ const Navbar = () => {
                 { path: '/tools', label: 'Tools' },
                 { path: '/thought-reverser', label: 'Thought Reverser' },
                 { path: '/image-reverser', label: 'Image Reverser' },
-                { path: '/text-reverser', label: 'Text Reverser' },
-                { path: '/admin', label: 'Admin', requiresAuth: true }
+                { path: '/text-reverser', label: 'Text Reverser' }
               ].map((item) => (
                 <SignedIn key={item.path + '-mobile-auth-check'}>
-                  {(!item.requiresAuth || (item.requiresAuth)) && (
-                    <Link 
-                      key={item.path}
-                      to={item.path} 
-                      className={`text-lg font-medium ${
-                        isActive(item.path) 
-                          ? 'text-purple-600' 
-                          : 'text-gray-700 hover:text-purple-600'
-                      }`}
-                      onClick={toggleMenu}
-                    >
-                      {item.label}
-                    </Link>
-                  )}
+                  <Link 
+                    key={item.path}
+                    to={item.path} 
+                    className={`text-lg font-medium ${
+                      isActive(item.path) 
+                        ? 'text-purple-600' 
+                        : 'text-gray-700 hover:text-purple-600'
+                    }`}
+                    onClick={toggleMenu}
+                  >
+                    {item.label}
+                  </Link>
                 </SignedIn>
               ))}
               <div className="pt-4 border-t border-gray-200">
@@ -189,23 +186,20 @@ const Navbar = () => {
                 </SignedOut>
                 <SignedIn>
                   <div className="flex items-center">
-                    <div className="relative">
-                      <UserButton 
-                        afterSignOutUrl="/" 
-                        appearance={{
-                          elements: {
-                            userButtonAvatarBox: "w-10 h-10",
-                            userButtonTrigger: "cursor-pointer"
-                          }
-                        }}
-                      />
-                    </div>
-                    <button 
-                      onClick={handleAccountClick}
-                      className="flex items-center space-x-3 flex-1 hover:bg-gray-50 p-2 rounded-md transition-colors w-full text-left ml-3"
+                    <UserButton 
+                      afterSignOutUrl="/" 
+                      appearance={{
+                        elements: {
+                          userButtonAvatarBox: "w-10 h-10",
+                          userButtonTrigger: "w-full flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded-md transition-colors",
+                          userButtonBox: "w-full"
+                        }
+                      }}
                     >
-                      <span className="text-gray-700 font-medium">My Account</span>
-                    </button>
+                      <div className="flex items-center ml-3">
+                        <span className="text-gray-700 font-medium">My Account</span>
+                      </div>
+                    </UserButton>
                   </div>
                 </SignedIn>
               </div>
