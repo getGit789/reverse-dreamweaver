@@ -109,8 +109,27 @@ const Navbar = () => {
             ))}
           </nav>
 
-          {/* Spacer div to balance the logo */}
-          <div className="hidden md:block min-w-[200px]"></div>
+          {/* Desktop Auth Buttons */}
+          <div className="hidden md:flex items-center min-w-[200px] justify-end">
+            <SignedOut>
+              <SignInButton mode="modal">
+                <button className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-md transition-colors">
+                  Sign In
+                </button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton 
+                afterSignOutUrl="/" 
+                appearance={{
+                  elements: {
+                    userButtonAvatarBox: "w-10 h-10",
+                    userButtonTrigger: "cursor-pointer"
+                  }
+                }}
+              />
+            </SignedIn>
+          </div>
 
           {/* Mobile Menu Button */}
           <button 
