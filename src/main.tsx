@@ -19,6 +19,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       afterSignInUrl="/tools"
       afterSignUpUrl="/tools"
       afterSignOutUrl="/"
+      routerPush={(to) => window.location.href = to}
+      routerReplace={(to) => window.location.href = to}
       appearance={{
         baseTheme: dark,
         elements: {

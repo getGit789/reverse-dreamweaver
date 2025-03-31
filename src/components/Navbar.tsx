@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { Menu, X, User } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { SignedIn, SignedOut, SignInButton, UserButton, useClerk } from '@clerk/clerk-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { openUserProfile } = useClerk();
   const userButtonRef = useRef<HTMLDivElement>(null);
 
@@ -47,6 +48,10 @@ const Navbar = () => {
     }, 100);
   };
 
+  const handleSignInClick = () => {
+    setIsMenuOpen(false); // Close the mobile menu when clicking sign in
+  };
+
   return (
     <>
       <header className={`w-full py-4 px-6 md:px-12 fixed top-0 z-[100] transition-all duration-300 ${
@@ -83,6 +88,7 @@ const Navbar = () => {
           <nav className="hidden md:flex items-center justify-center flex-1 relative z-[101]">
             {[
               { path: '/', label: 'Home' },
+              { path: '/tools', label: 'Tools' },
               { path: '/thought-reverser', label: 'Thought Reverser' },
               { path: '/image-reverser', label: 'Image Reverser' },
               { path: '/text-reverser', label: 'Text Reverser' },
@@ -147,6 +153,7 @@ const Navbar = () => {
             <nav className="flex flex-col space-y-4 p-6">
               {[
                 { path: '/', label: 'Home' },
+                { path: '/tools', label: 'Tools' },
                 { path: '/thought-reverser', label: 'Thought Reverser' },
                 { path: '/image-reverser', label: 'Image Reverser' },
                 { path: '/text-reverser', label: 'Text Reverser' },
@@ -172,7 +179,10 @@ const Navbar = () => {
               <div className="pt-4 border-t border-gray-200">
                 <SignedOut>
                   <SignInButton mode="modal">
-                    <button className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-md transition-colors">
+                    <button 
+                      className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                      onClick={handleSignInClick}
+                    >
                       Sign In
                     </button>
                   </SignInButton>
